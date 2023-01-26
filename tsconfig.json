@@ -7,7 +7,7 @@
       "@/*": ["./src/*"]
     }
   },
-
+  "files": ["ts-shim.d.ts"],
   "references": [
     {
       "path": "./tsconfig.config.json"
