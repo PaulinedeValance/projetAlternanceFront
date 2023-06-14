@@ -14,7 +14,7 @@ import Input from './Input.vue'
             <Input :placeholder="'Nom de famille'" :label-content="'Nom'" />
             <Input :placeholder="'Prénom'" :label-content="'Prénom'" />
             <Input :placeholder="'email'" :label-content="'Email'" />
-            <textarea type="email" placeholder="Message :"></textarea>
+            <textarea type="email" placeholder="Message"></textarea>
 
             <Button :name="'Envoyer'"></Button>
 
@@ -24,5 +24,9 @@ import Input from './Input.vue'
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Pacifico&display=swap');
 
+form {
+  font-family: 'Didact Gothic', sans-serif;
+}
 </style>
