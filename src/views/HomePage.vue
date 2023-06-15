@@ -5,6 +5,9 @@ import Modal from "../components/Modal.vue";
 import { ref } from "vue";
 
 const showModal = ref(false);
+const email = ref<string>("");
+const password = ref<string>("");
+const forgotPassword = ref<string>("");
 
 const openModal = () => {
   console.log("Open Modal");
@@ -14,10 +17,20 @@ const openModal = () => {
 const closeModal = () => {
   showModal.value = false;
 };
+
+const login = () => {};
 </script>
 
 <template>
   <h1>Page d'accueil</h1>
+  <div>
+    <p class="text-homepage">
+      L' Application Web pour vos jeux de société Simple, intuitive,
+      performante, multi-support, collaborative et GRATUITE ! Connectez-vous ou
+      créez un compte pour commencer.
+    </p>
+  </div>
+
   <Button :name="'Accèder à la ludothèque'" @click="openModal"></Button>
 
   <div class="modal-container">
@@ -41,7 +54,7 @@ const closeModal = () => {
 
           <div class="form-group">
             <label for="remember">
-              <input type="checkbox" id="remember" v-model="remember" />
+              <input type="checkbox" id="remember" v-model="forgotPassword" />
               Se souvenir de moi
             </label>
           </div>
@@ -120,6 +133,10 @@ input[type="checkbox"] {
 
 a {
   text-decoration: underline;
+}
+
+.text-homepage {
+  width: 500px;
 }
 
 /* .close-button-modale:focus {
