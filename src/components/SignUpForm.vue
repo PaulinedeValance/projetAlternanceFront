@@ -6,6 +6,8 @@ import { ref } from "vue";
 const username = ref<string>("");
 const email = ref<string>("");
 const password = ref<string>("");
+const repeatPassword = ref<string>("");
+const showPassword = ref(false);
 
 const createAccount = () => {
   console.log("champs :", username.value, email.value, password.value);
@@ -54,13 +56,39 @@ const createAccount = () => {
         :type="'email'"
       />
     </div>
+    <div class="form-input">
+      <div class="password-input-wrapper">
+        <Input
+          v-model="password"
+          :placeholder="'password'"
+          :label-content="'Mot de passe'"
+          :type="showPassword ? 'text' : 'password'"
+        />
+        <span @click="showPassword = !showPassword">
+          <font-awesome-icon
+            :icon="showPassword ? 'eye-slash' : 'eye'"
+            class="password-toggle-icon"
+          />
+        </span>
+      </div>
+    </div>
+    <div class="form-input">
+      <div class="password-input-wrapper">
+        <Input
+          v-model="repeatPassword"
+          :placeholder="'password'"
+          :label-content="'Répéter le mot de passe'"
+          :type="'password'"
+        />
+        <span @click="showPassword = !showPassword">
+          <font-awesome-icon
+            :icon="showPassword ? 'eye-slash' : 'eye'"
+            class="password-toggle-icon"
+          />
+        </span>
+      </div>
+    </div>
 
-    <Input
-      v-model="password"
-      :placeholder="'password'"
-      :label-content="'Mot de passe'"
-      :type="'password'"
-    />
     <Button :name="'Créer compte'" @click="createAccount"></Button>
   </form>
 </template>
@@ -89,5 +117,17 @@ form {
 
 .form-input {
   margin-bottom: 20px;
+}
+
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 </style>

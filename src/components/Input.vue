@@ -21,3 +21,9 @@ defineProps<{
     />
   </div>
 </template>
+<style scoped>
+.input-contact {
+  padding: 7px;
+  margin-left: 10px;
+}
+</style>

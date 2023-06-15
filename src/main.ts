@@ -1,14 +1,23 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from "vue";
+import { createPinia } from "pinia";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-import App from './App.vue'
-import router from './router'
+import App from "./App.vue";
+import router from "./router";
 
-import './assets/main.css'
+import "./assets/main.css";
 
-const app = createApp(App)
+// Ajout des icônes que j'aimerais utiliser à la bibliothèque Font Awesome
+library.add(faEye, faEyeSlash);
 
-app.use(createPinia())
-app.use(router)
+const app = createApp(App);
 
-app.mount('#app')
+app.use(createPinia());
+app.use(router);
+
+// J'enregistre le composant FontAwesomeIcon pour pouvoir l'utiliser dans mon app
+app.component("font-awesome-icon", FontAwesomeIcon);
+
+app.mount("#app");
