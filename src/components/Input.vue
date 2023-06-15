@@ -3,6 +3,7 @@ defineProps<{
   placeholder: string;
   labelContent: string;
   modelValue: string;
+  type: string;
 }>();
 </script>
 
@@ -11,7 +12,7 @@ defineProps<{
     <label for="firstname">{{ labelContent }}</label>
     <input
       class="input-contact"
-      type="text"
+      :type="type"
       :placeholder="placeholder"
       :value="modelValue"
       @input="

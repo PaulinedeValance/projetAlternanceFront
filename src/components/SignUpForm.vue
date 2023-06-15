@@ -43,16 +43,23 @@ const createAccount = () => {
         v-model="username"
         :placeholder="'Username'"
         :label-content="'Username'"
+        :type="'text'"
       />
     </div>
     <div class="form-input">
-      <Input v-model="email" :placeholder="'email'" :label-content="'Email'" />
+      <Input
+        v-model="email"
+        :placeholder="'email'"
+        :label-content="'Email'"
+        :type="'email'"
+      />
     </div>
 
     <Input
       v-model="password"
       :placeholder="'password'"
       :label-content="'Mot de passe'"
+      :type="'password'"
     />
     <Button :name="'Créer compte'" @click="createAccount"></Button>
   </form>
