@@ -3,6 +3,7 @@ import Button from "./Button.vue";
 import Input from "./Input.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import Cookies from "js-cookie";
 
 const username = ref<string>("");
 const email = ref<string>("");
@@ -24,7 +25,7 @@ const createAccount = () => {
     password: password.value,
   };
 
-  fetch("http://localhost:5027/api/users", {
+  fetch("http://localhost:5000/api/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -42,6 +43,11 @@ const createAccount = () => {
     .catch((error) => {
       console.log("Erreur :", error);
     });
+
+  // Cookies.set("email", email.value, { expires: 1 / 24 });
+  // Cookies.set("password", password.value, { expires: 1 / 24 });
+  // localStorage.setItem("username", username.value);
+  // localStorage.setItem("password", password.value);
 };
 </script>
 

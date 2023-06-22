@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import Slider from "@/components/Slider.vue";
 import Button from "../components/Button.vue";
+import Input from "../components/Input.vue";
 import Modal from "../components/Modal.vue";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const showModal = ref(false);
 const email = ref<string>("");
@@ -18,7 +22,35 @@ const closeModal = () => {
   showModal.value = false;
 };
 
-const login = () => {};
+const login = async () => {
+  console.log("Fonction login appelée");
+  console.log(email.value);
+  console.log(password.value);
+  try {
+    const response = await fetch("http://localhost:5000/api/login/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value,
+      }),
+    });
+
+    console.log(response);
+
+    if (response.ok) {
+      console.log("Response OK");
+
+      router.push({ name: "jeux" });
+    } else {
+      console.log("échec");
+    }
+  } catch (error) {
+    console.log("Erreur lors de la connexion :", error);
+  }
+};
 </script>
 
 <template>
@@ -39,24 +71,35 @@ const login = () => {};
         <button @click="closeModal" class="close-button-modale">X</button>
         <!-- <Button :name="'X'" @click="closeModal" class="custom-button"></Button> -->
         <h2>Connexion</h2>
-        <form class="login-form">
+        <form @submit.prevent class="login-form">
           <div class="form-group">
-            <input type="email" placeholder="Email" v-model="email" />
-          </div>
-
-          <div class="form-group">
-            <input
-              type="password"
-              placeholder="Mot de passe"
-              v-model="password"
+            <Input
+              :type="'email'"
+              placeholder="Email"
+              v-model="email"
+              :label-content="'Email'"
             />
           </div>
 
           <div class="form-group">
-            <label for="remember">
-              <input type="checkbox" id="remember" v-model="forgotPassword" />
+            <Input
+              :type="'password'"
+              placeholder="Mot de passe"
+              v-model="password"
+              :label-content="'Mot de passe'"
+            />
+          </div>
+
+          <div class="form-group">
+            <!-- <label for="remember">
+              <Input
+                type="checkbox"
+                id="remember"
+                v-model="forgotPassword"
+                :label-content="''"
+              />
               Se souvenir de moi
-            </label>
+            </label> -->
           </div>
 
           <div class="form-group">
