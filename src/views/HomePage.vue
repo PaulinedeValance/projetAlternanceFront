@@ -28,6 +28,7 @@ const login = async () => {
   console.log(password.value);
   try {
     const response = await fetch("http://localhost:5000/api/login/user", {
+      credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
