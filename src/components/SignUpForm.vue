@@ -13,7 +13,24 @@ const passwordError = ref<string>("");
 const showPassword = ref(false);
 const router = useRouter();
 
+const validatePassword = () => {
+  if (password.value.length < 8) {
+    passwordError.value = "Password must be at least 8 characters long.";
+    return false;
+  } else {
+    passwordError.value = "";
+    return true;
+  }
+};
+
 const createAccount = () => {
+  const isPasswordValid = validatePassword();
+
+  if (!isPasswordValid || password.value !== passwordRepeat.value) {
+    passwordError.value = "Le mot de passe doit contenir minimum 8 caractères";
+    return;
+  }
+
   if (password.value !== passwordRepeat.value) {
     passwordError.value = "Les deux mots de passe ne correspondent pas.";
     return;
@@ -35,19 +52,12 @@ const createAccount = () => {
     .then((response) => {
       if (response.ok) {
         console.log("Compte utilisateur créé avec succès");
-      } else {
-        // Redirection vers la page "jeux"
         router.push({ name: "jeux" });
       }
     })
     .catch((error) => {
       console.log("Erreur :", error);
     });
-
-  // Cookies.set("email", email.value, { expires: 1 / 24 });
-  // Cookies.set("password", password.value, { expires: 1 / 24 });
-  // localStorage.setItem("username", username.value);
-  // localStorage.setItem("password", password.value);
 };
 </script>
 
@@ -104,15 +114,6 @@ const createAccount = () => {
     </div>
     <p v-if="passwordError" class="error-message">{{ passwordError }}</p>
     <Button :name="'Créer compte'" @click="createAccount"></Button>
-    <!-- <ul class="requirements">
-      <li
-        v-for="(requirement, key) in passwordRequirements"
-        :key="key"
-        :class="requirement.predicate ? 'is-success' : 'is-error'"
-      >
-        {{ requirement.name }}
-      </li>
-    </ul> -->
   </form>
 </template>
 
