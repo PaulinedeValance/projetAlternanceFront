@@ -3,7 +3,6 @@ import Button from "./Button.vue";
 import Input from "./Input.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import Cookies from "js-cookie";
 
 const username = ref<string>("");
 const email = ref<string>("");
@@ -102,7 +101,7 @@ const createAccount = () => {
           v-model="passwordRepeat"
           :placeholder="'password'"
           :label-content="'Répéter le mot de passe'"
-          :type="'password'"
+          :type="showPassword ? 'text' : 'password'"
         />
         <span @click="showPassword = !showPassword">
           <font-awesome-icon
