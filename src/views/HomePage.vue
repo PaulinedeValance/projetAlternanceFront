@@ -12,7 +12,6 @@ const showModal = ref(false);
 const email = ref<string>("");
 const password = ref<string>("");
 
-// J'utilise le type UserStore pour informer TypeScript du type de store
 const store = useUserStore();
 
 
