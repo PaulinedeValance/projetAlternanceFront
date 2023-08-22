@@ -5,27 +5,28 @@ import Input from "../components/Input.vue";
 import Modal from "../components/Modal.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userState";
 
 const router = useRouter();
-
 const showModal = ref(false);
 const email = ref<string>("");
 const password = ref<string>("");
-const forgotPassword = ref<string>("");
+
+// J'utilise le type UserStore pour informer TypeScript du type de store
+const store = useUserStore();
+
 
 const openModal = () => {
-  console.log("Open Modal");
-  showModal.value = true;
-};
+  showModal.value = true
+}
+
 
 const closeModal = () => {
-  showModal.value = false;
-};
+  showModal.value = false
+}
+
 
 const login = async () => {
-  console.log("Fonction login appelée");
-  console.log(email.value);
-  console.log(password.value);
   try {
     const response = await fetch("http://localhost:5000/api/login/user", {
       credentials: "include",
@@ -36,17 +37,14 @@ const login = async () => {
       body: JSON.stringify({
         email: email.value,
         password: password.value,
+      
       }),
     });
 
-    console.log(response);
-
     if (response.ok) {
-      console.log("Response OK");
-
-      router.push({ name: "jeux" });
-    } else {
-      console.log("échec");
+      const userData = await response.json()
+      store.setUser({email: userData.email, username: userData.username, id: userData._id})
+      router.push({ name: "dashboard" });
     }
   } catch (error) {
     console.log("Erreur lors de la connexion :", error);
@@ -62,9 +60,10 @@ const login = async () => {
       performante, multi-support, collaborative et GRATUITE ! Connectez-vous ou
       créez un compte pour commencer.
     </p>
+    <!-- <p>{{ store.id }}</p> -->
   </div>
 
-  <Button :name="'Accèder à la ludothèque'" @click="openModal"></Button>
+  <Button :name="'Se connecter à la ludothèque'" @click="openModal"></Button>
 
   <div class="modal-container">
     <Modal :isOpen="showModal" @close="closeModal">
