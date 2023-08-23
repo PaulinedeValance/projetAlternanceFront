@@ -4,10 +4,10 @@ import DashboardLayout from "../layouts/DashboardLayout.vue";
 import type { Games } from "@/types";
 import { useUserStore } from "@/stores/userState";
 import { onMounted, ref } from "vue";
+import { useFetch } from '@vueuse/core';
 
 const store = useUserStore();
 onMounted(async () => {
-  console.log('La fonction onMounted a été exécutée !');
   if (store.id) {
     
     await store.fetchUserDetails(store.id);
@@ -39,18 +39,52 @@ const openDetail = (id:string) => {
   
 }
 
-// const addToCollection = (id:string) => {
-//   console.log("cliqué");
-  
+const isDropdownOpen = ref(false)
+
+const toggleDropdown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value;
+};
+
+// const logout = () => {
+//   const { isFetching, error, data } = useFetch('/api/logout', {
+//     method: 'GET',
+//   });
 // }
+
+const logout = () => {
+  // Appel à l'API de déconnexion
+  fetch('/api/logout', {
+    method: 'GET', // 
+  })
+  .then(response => {
+    if (response.ok) {
+      // Déconnexion réussie, utilisez router.push pour la redirection
+      router.push('/'); // On redirige vers la page d'accueil
+    } else {
+      // En cas d'erreur
+      console.error('Échec de la déconnexion');
+    }
+  })
+  .catch(error => {
+    console.error('Erreur lors de la déconnexion', error);
+  });
+};
+
+
 
 </script>
 <template>
   <DashboardLayout>
   </DashboardLayout>
 <div class="dashboard-container">
-  <div class="dashboard-avatar">
-    <p>{{ store.username.charAt(0).toUpperCase() }}</p>
+  <div class="dashboard-dropdown" @click="toggleDropdown">
+    <div class="dashboard-avatar">
+      <p>{{ store.username.charAt(0).toUpperCase() }}</p>
+    </div>
+    <div v-if="isDropdownOpen" class="dropdown-content">
+      <p>Bonjour, {{ store.username }} !</p>
+      <button @click="logout">Déconnexion</button>
+    </div>
   </div>
 </div>
 <div class="page-container">
@@ -61,7 +95,7 @@ const openDetail = (id:string) => {
         <div class="image-container">
           <img :src="game.imageURL" alt="Image du jeu" class="game-image" @click="openDetail(game._id)">
         </div>
-        <font-awesome-icon :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" />
+        <!-- <font-awesome-icon :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" /> -->
       </div>
     </div>
   </div>
@@ -88,6 +122,7 @@ const openDetail = (id:string) => {
   color: #fff;
   margin-right: 10px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .page-container {
