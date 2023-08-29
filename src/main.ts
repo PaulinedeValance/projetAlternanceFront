@@ -8,6 +8,9 @@ import {
   faPuzzlePiece,
   faList,
   faRotateRight,
+  faPlus,
+  faHeart,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -18,7 +21,7 @@ import router from './router';
 import './assets/main.css';
 
 // Ajout des icônes que j'aimerais utiliser à la bibliothèque Font Awesome
-library.add(faEye, faEyeSlash, faCameraRetro, faPuzzlePiece, faList, faRotateRight);
+library.add(faEye, faEyeSlash, faCameraRetro, faPuzzlePiece, faList, faRotateRight, faPlus, faHeart, faTrash);
 
 const app = createApp(App);
 

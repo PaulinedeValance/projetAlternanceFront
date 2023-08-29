@@ -5,3 +5,13 @@ export interface Games {
   imageURL: string;
   _id: string;
 }
+
+export interface UserInfo {
+  id: string;
+  username: string;
+  email: string;
+}
+
+export interface UserStore {
+  setUser: (user: UserInfo) => void;
+}

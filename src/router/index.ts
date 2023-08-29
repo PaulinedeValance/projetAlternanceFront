@@ -32,9 +32,15 @@ const router = createRouter({
       meta: { layout: DashboardLayout }, // J'utilise le layout spécifique pour le Dashboard
     },
     {
-      path: '/mycollection',
-      name: 'myCollection',
-      component: () => import('../views/MyCollection.vue'),
+      path: '/usercollection',
+      name: 'userCollection',
+      component: () => import('../views/UserCollection.vue'),
+      meta: { layout: DashboardLayout },
+    },
+    {
+      path: '/userwishlist',
+      name: 'userWishlist',
+      component: () => import('../views/UserWishlist.vue'),
       meta: { layout: DashboardLayout },
     },
     {

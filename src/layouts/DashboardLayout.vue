@@ -5,22 +5,45 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 <template>
   <nav>
+    <!-- <div class="logo">
+      <router-link to="/dashboard">
+         <img src="/images/logo.png" alt="Logo" class="logo-img" />
+      </router-link>
+     
+    </div> -->
     <div class="sidebar">
       <ul>
-        <li class="navbar-link"><router-link to="/mycollection"><font-awesome-icon :icon="'puzzle-piece'" class="icon-camera" />Ma collection</router-link></li>
-        <li><a href="#"><font-awesome-icon :icon="'list'" class="icon-camera" />Wish list</a></li>
+        <li class="navbar-link"><router-link to="/usercollection"><font-awesome-icon :icon="'puzzle-piece'" class="icon-camera" />Ma collection</router-link></li>
+        <li class="navbar-link"><router-link to="/userwishlist"><font-awesome-icon :icon="'list'" class="icon-camera" />Wish list</router-link></li>
         <li><a href="#"><font-awesome-icon :icon="'rotate-right'" class="icon-camera" />Générateur</a></li>
       </ul>
     </div>
+    
   </nav>
+
 </template>
 
 <style scoped>
+ 
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo-img {
+  width: 250px; 
+  height: auto;
+  margin-left: 200px;
+}
+
 nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  position: relative;
 }
 
 ul {
@@ -37,7 +60,9 @@ a {
   text-decoration: none;
   color: white;
   font-size: 21px;
-  font-weight: bold;
+  font-weight: 700;
+  font-family: 'Bellota Text', cursive;
+  
 }
 
 .sidebar {

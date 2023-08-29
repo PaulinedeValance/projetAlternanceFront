@@ -6,7 +6,9 @@ const games = ref<Games[]>([]);
 
 const fetchData = async () => {
   try {
-    const response = await fetch("http://localhost:5000/api/games");
+    const response = await fetch("http://localhost:5000/api/games", {
+      credentials: "include",
+    });
     const data = await response.json();
     games.value = data.map((game: Games) => ({
       nom: game.nom,
