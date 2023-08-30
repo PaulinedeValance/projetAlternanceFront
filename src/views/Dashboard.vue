@@ -1,44 +1,33 @@
 <script setup lang="ts">
 import router from "@/router";
 import DashboardLayout from "../layouts/DashboardLayout.vue";
-import userCollection from "./UserCollection.vue";
 import type { Games } from "@/types";
 import { useUserStore } from "@/stores/userState";
-import { onMounted, ref } from "vue";
-import { useFetch } from '@vueuse/core';
+import { ref } from "vue";
 import { useCollectionStore } from "@/stores/gamesCollectionState"
+import GameCard from "../components/GameCard.vue"
 
 
 const userStore = useUserStore();
 const userId = userStore.id;
 
 const store = useUserStore();
-
-// onMounted(async () => {
-//   if (store.id) {
-    
-//     await store.fetchUserDetails(store.id);
-//     // console.log(store.username);
-//     // console.log(store.email);
-//   }
-// });
-
 const collectionStore = useCollectionStore()
 
-const addToCollection = async (gameId:any) => {
+const addToCollection = async (gameId: any) => {
   try {
     const response = await fetch(`http://localhost:5000/api/collection`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ userId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
-  });
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
+    });
 
-  if (response.ok) {
+    if (response.ok) {
       const addedGame = await response.json(); // Si l'API renvoie des informations sur le jeu ajouté
       collectionStore.addToCollection(addedGame); // Le store est mis à jour avec le jeu ajouté
-      console.log('Jeu ajouté à la collection');
+
     } else {
       console.error('Échec de l\'ajout à la collection');
     }
@@ -47,20 +36,20 @@ const addToCollection = async (gameId:any) => {
   }
 }
 
-const addToWishlist = async (gameId:any) => {
+const addToWishlist = async (gameId: any) => {
   try {
     const response = await fetch(`http://localhost:5000/api/wishlist`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ userId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
-  });
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
+    });
 
-  if (response.ok) {
+    if (response.ok) {
       const addedGame = await response.json(); // Si l'API renvoie des informations sur le jeu ajouté
       collectionStore.addToWishlist(addedGame); // Le store est mis à jour avec le jeu ajouté
-      console.log('Jeu ajouté à la collection');
+
     } else {
       console.error('Échec de l\'ajout à la collection');
     }
@@ -78,18 +67,15 @@ const fetchData = async () => {
       credentials: "include",
     });
     games.value = await response.json();
-    console.log(games.value);
-    
+
   } catch (error) {
     console.error(error);
   }
 };
 fetchData();
 
-const openDetail = (id:string) => {
+const openDetail = (id: string) => {
   router.push(`/game/${id}`)
-  console.log(id);
-  
 }
 
 const isDropdownOpen = ref(false)
@@ -102,63 +88,77 @@ const toggleDropdown = () => {
 const logout = () => {
   // Appel à l'API de déconnexion
   fetch('"http://localhost:5000/api/logout"', {
-    method: 'GET', 
+    method: 'GET',
   })
-  .then(response => {
-    if (response.ok) {
-      // Déconnexion réussie, utilisez router.push pour la redirection
-      router.push('/'); // On redirige vers la page d'accueil
-    } else {
-      // En cas d'erreur
-      console.error('Échec de la déconnexion');
-    }
-  })
-  .catch(error => {
-    console.error('Erreur lors de la déconnexion', error);
-  });
+    .then(response => {
+      if (response.ok) {
+        // Déconnexion réussie, utilisez router.push pour la redirection
+        router.push('/'); // On redirige vers la page d'accueil
+      } else {
+        // En cas d'erreur
+        console.error('Échec de la déconnexion');
+      }
+    })
+    .catch(error => {
+      console.error('Erreur lors de la déconnexion', error);
+    });
 };
 
 </script>
 
 <template>
   <DashboardLayout>
-  </DashboardLayout>
-<div class="dashboard-container"> 
-  <p class="welcome-title">Bienvenue sur le site de la Ruche Ludique, {{store.username}}</p>
-  <div class="dashboard-dropdown" @click="toggleDropdown">
-    <div class="dashboard-avatar">
-      <p>{{ store.username.charAt(0).toUpperCase() }}</p>
-     
-    </div>
-    <div v-if="isDropdownOpen" class="dropdown-content">
-      <p>Bonjour, {{ store.username }} !</p>
-      <button @click="logout">Déconnexion</button>
-    </div>
-  </div>
-</div>
-<div class="page-container">
-  <div>
-    <div class="game-container">
-      <div v-for="game in games" :key="game._id" class="game-card">
-        <div class="image-container">
-          <img :src="game.imageURL" alt="Image du jeu" class="game-image" @click="openDetail(game._id)">
+    <div class="dashboard-container">
+      <p class="welcome-title">Bienvenue sur le site de la Ruche Ludique, {{ store.username }}</p>
+      <div class="dashboard-dropdown" @click="toggleDropdown">
+        <div class="dashboard-avatar">
+          <p>{{ store.username.charAt(0).toUpperCase() }}</p>
+
         </div>
-        <div class="game-name">{{ game.nom }}</div>
-        <font-awesome-icon :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" />
-        <font-awesome-icon :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" />
+        <div v-if="isDropdownOpen" class="dropdown-content">
+          <p>Bonjour, {{ store.username }} !</p>
+          <button @click="logout">Déconnexion</button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+    <div class="page-container">
+      <div>
+        <div class="game-container">
+          <div v-for="game in games" :key="game._id" class="game-card">
+            <div class="image-container">
+              <img :src="game.imageURL" alt="Image du jeu" class="game-image" @click="openDetail(game._id)">
+            </div>
+            <div class="game-name">{{ game.nom }}</div>
+            <font-awesome-icon :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" />
+            <font-awesome-icon :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <GameCard>
+
+    </GameCard>
+
+  </DashboardLayout>
 </template>
 
-<style>
+<style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Cabin+Sketch:wght@700&family=Didact+Gothic&family=Handlee&family=Londrina+Shadow&family=Pacifico&family=Patrick+Hand+SC&family=Rampart+One&family=Sue+Ellen+Francisco&display=swap');
 
 .welcome-title {
   font-family: 'Patrick Hand SC', cursive;
   margin: 6px 10px 0 auto;
   font-size: 32px;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-left: 270px;
 }
 
 .dashboard-container {
@@ -183,10 +183,6 @@ const logout = () => {
   cursor: pointer;
 }
 
-.page-container {
-  margin-left: 270px;
-  
-}
 .game-container {
   display: flex;
   flex-wrap: wrap;
@@ -247,6 +243,4 @@ const logout = () => {
   transform: scale(1.7);
   color: green;
 }
-
-
 </style>
