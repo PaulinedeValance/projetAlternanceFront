@@ -4,27 +4,31 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 </script>
 
 <template>
-  <nav>
-    <!-- <div class="logo">
-      <router-link to="/dashboard">
-         <img src="/images/logo.png" alt="Logo" class="logo-img" />
-      </router-link>
-     
-    </div> -->
-    <div class="sidebar">
-      <ul>
-        <li class="navbar-link"><router-link to="/usercollection"><font-awesome-icon :icon="'puzzle-piece'" class="icon-camera" />Ma collection</router-link></li>
-        <li class="navbar-link"><router-link to="/userwishlist"><font-awesome-icon :icon="'list'" class="icon-camera" />Wish list</router-link></li>
-        <li><a href="#"><font-awesome-icon :icon="'rotate-right'" class="icon-camera" />Générateur</a></li>
-      </ul>
+  <div class="dashboard-layout">
+    <div class="flex-container">
+      <div class="sidebar">
+        <ul>
+          <li class="navbar-link"><router-link to="/usercollection"><font-awesome-icon :icon="'puzzle-piece'"
+                class="icon-camera" />Ma collection</router-link></li>
+          <li class="navbar-link"><router-link to="/userwishlist"><font-awesome-icon :icon="'list'"
+                class="icon-camera" />Wish list</router-link></li>
+          <li><a href="#"><font-awesome-icon :icon="'rotate-right'" class="icon-camera" />Générateur</a></li>
+        </ul>
+      </div>
+      <div class="page-container">
+        <slot></slot>
+      </div>
     </div>
-    
-  </nav>
-
+  </div>
 </template>
 
-<style scoped>
- 
+<style>
+.dashboard-layout {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
 .logo {
   display: flex;
   justify-content: center;
@@ -33,7 +37,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 }
 
 .logo-img {
-  width: 250px; 
+  width: 250px;
   height: auto;
   margin-left: 200px;
 }
@@ -62,7 +66,7 @@ a {
   font-size: 21px;
   font-weight: 700;
   font-family: 'Bellota Text', cursive;
-  
+
 }
 
 .sidebar {
@@ -84,6 +88,16 @@ a {
   color: white;
   margin-right: 15px;
 
-  
+
+}
+
+.flex-container {
+  display: flex;
+}
+
+.page-container {
+  flex: 1;
+  padding: 20px;
+
 }
 </style>
