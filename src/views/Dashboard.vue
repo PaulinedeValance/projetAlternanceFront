@@ -3,65 +3,15 @@ import router from "@/router";
 import DashboardLayout from "../layouts/DashboardLayout.vue";
 import type { Games } from "@/types";
 import { useUserStore } from "@/stores/userState";
-import { ref } from "vue";
-import { useCollectionStore } from "@/stores/gamesCollectionState"
+import { onMounted, ref } from "vue";
 import GameCard from "../components/GameCard.vue"
 
 
-const userStore = useUserStore();
-const userId = userStore.id;
-
 const store = useUserStore();
-const collectionStore = useCollectionStore()
-
-const addToCollection = async (gameId: any) => {
-  try {
-    const response = await fetch(`http://localhost:5000/api/collection`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
-    });
-
-    if (response.ok) {
-      const addedGame = await response.json(); // Si l'API renvoie des informations sur le jeu ajouté
-      collectionStore.addToCollection(addedGame); // Le store est mis à jour avec le jeu ajouté
-
-    } else {
-      console.error('Échec de l\'ajout à la collection');
-    }
-  } catch (error) {
-    console.error('Erreur lors de l\'ajout à la collection', error);
-  }
-}
-
-const addToWishlist = async (gameId: any) => {
-  try {
-    const response = await fetch(`http://localhost:5000/api/wishlist`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
-    });
-
-    if (response.ok) {
-      const addedGame = await response.json(); // Si l'API renvoie des informations sur le jeu ajouté
-      collectionStore.addToWishlist(addedGame); // Le store est mis à jour avec le jeu ajouté
-
-    } else {
-      console.error('Échec de l\'ajout à la collection');
-    }
-  } catch (error) {
-    console.error('Erreur lors de l\'ajout à la collection', error);
-  }
-}
-
-
 const games = ref<Games[]>([]);
 
-const fetchData = async () => {
+
+const fetchGames = async () => {
   try {
     const response = await fetch("http://localhost:5000/api/games", {
       credentials: "include",
@@ -72,11 +22,11 @@ const fetchData = async () => {
     console.error(error);
   }
 };
-fetchData();
 
-const openDetail = (id: string) => {
-  router.push(`/game/${id}`)
-}
+onMounted(async () => {
+  await fetchGames();
+
+})
 
 const isDropdownOpen = ref(false)
 
@@ -124,21 +74,13 @@ const logout = () => {
     <div class="page-container">
       <div>
         <div class="game-container">
-          <div v-for="game in games" :key="game._id" class="game-card">
-            <div class="image-container">
-              <img :src="game.imageURL" alt="Image du jeu" class="game-image" @click="openDetail(game._id)">
-            </div>
-            <div class="game-name">{{ game.nom }}</div>
-            <font-awesome-icon :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" />
-            <font-awesome-icon :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" />
-          </div>
+          <GameCard v-for="game in games" :key="game._id" :game="game" />
         </div>
       </div>
     </div>
 
-    <GameCard>
 
-    </GameCard>
+
 
   </DashboardLayout>
 </template>
@@ -181,66 +123,5 @@ const logout = () => {
   margin-right: 10px;
   margin-top: 10px;
   cursor: pointer;
-}
-
-.game-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 120px;
-}
-
-/* TEST DE DESIGN DE CARD */
-
-/* .game-card {
-  width: 400px;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-} */
-
-/* .game-card {
-  width: 400px;
-   margin: 10px;
-  padding: 10px;
-  text-align: center;
-  border-radius: 30px;
-  box-shadow: 15px 15px 30px #bebebe,
-             -15px -15px 30px #ffffff;
-} */
-
-.game-name {
-  font-size: 20px;
-  margin-bottom: 30px;
-  font-family: 'Bellota Text', cursive;
-}
-
-.image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.game-image {
-  max-width: 300px;
-  max-height: 100%;
-  width: 100%;
-}
-
-.add-icon {
-  cursor: pointer;
-  padding: 7px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.add-icon:hover {
-  transform: scale(1.7);
-}
-
-.add-icon.clicked {
-  transform: scale(1.7);
-  color: green;
 }
 </style>

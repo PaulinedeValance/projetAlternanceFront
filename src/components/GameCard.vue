@@ -35,15 +35,41 @@ const addToCollection = async (gameId: any) => {
         console.error('Erreur lors de l\'ajout à la collection', error);
     }
 }
+
+const addToWishlist = async (gameId: any) => {
+    try {
+        const response = await fetch(`http://localhost:5000/api/wishlist`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
+        });
+
+        if (response.ok) {
+            const addedGame = await response.json();
+            collectionStore.addToWishlist(addedGame);
+
+        } else {
+            console.error('Échec de l\'ajout à la collection');
+        }
+    } catch (error) {
+        console.error('Erreur lors de l\'ajout à la collection', error);
+    }
+}
 </script>
 
 <template>
-    <div class="image-container">
-        <img :src="game.imageURL" alt="Image du jeu" class="game-image" @click="openDetail(game._id)">
+    <div class="game-container">
+        <div class="game-card">
+            <div class="image-container">
+                <img :src="game.imageURL" alt="Image du jeu" class="game-image" @click="openDetail(game._id)">
+            </div>
+            <div class="game-name">{{ game.nom }}</div>
+            <font-awesome-icon :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" />
+            <font-awesome-icon :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" />
+        </div>
     </div>
-    <div class="game-name">{{ game.nom }}</div>
-    <font-awesome-icon :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" />
-    <!-- <font-awesome-icon :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" /> -->
 </template>
 
 <style>
@@ -53,16 +79,43 @@ const addToCollection = async (gameId: any) => {
     align-items: center;
 }
 
+.game-card {
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* .game-card {
+    width: 100px;
+    margin: 20px;
+    padding: 40px;
+    text-align: center;
+    border-radius: 30px;
+    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+} */
+
 .game-image {
     max-width: 300px;
     max-height: 100%;
     width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .game-name {
     font-size: 20px;
     margin-bottom: 30px;
     font-family: 'Bellota Text', cursive;
+}
+
+.game-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
 }
 
 .add-icon {
