@@ -36,13 +36,13 @@ const login = async () => {
       body: JSON.stringify({
         email: email.value,
         password: password.value,
-      
+
       }),
     });
 
     if (response.ok) {
       const userData = await response.json()
-      store.setUser({email: userData.email, username: userData.username, id: userData._id})
+      store.setUser({ email: userData.email, username: userData.username, id: userData._id })
       router.push({ name: "dashboard" });
     }
   } catch (error) {
@@ -59,7 +59,6 @@ const login = async () => {
       performante, multi-support, collaborative et GRATUITE ! Connectez-vous ou
       créez un compte pour commencer.
     </p>
-    <!-- <p>{{ store.id }}</p> -->
   </div>
 
   <Button :name="'Se connecter à la ludothèque'" @click="openModal"></Button>
@@ -72,34 +71,14 @@ const login = async () => {
         <h2>Connexion</h2>
         <form @submit.prevent class="login-form">
           <div class="form-group">
-            <Input
-              :type="'email'"
-              placeholder="Email"
-              v-model="email"
-              :label-content="'Email'"
-            />
+            <Input :type="'email'" placeholder="Email" v-model="email" :label-content="'Email'" />
           </div>
 
           <div class="form-group">
-            <Input
-              :type="'password'"
-              placeholder="Mot de passe"
-              v-model="password"
-              :label-content="'Mot de passe'"
-            />
+            <Input :type="'password'" placeholder="Mot de passe" v-model="password" :label-content="'Mot de passe'" />
           </div>
 
-          <div class="form-group">
-            <!-- <label for="remember">
-              <Input
-                type="checkbox"
-                id="remember"
-                v-model="forgotPassword"
-                :label-content="''"
-              />
-              Se souvenir de moi
-            </label> -->
-          </div>
+
 
           <div class="form-group">
             <a href="#">Mot de passe oublié</a>
@@ -122,6 +101,7 @@ const login = async () => {
   justify-content: center;
   align-items: center;
 }
+
 .close-button-modale {
   position: absolute;
   top: 10px;
