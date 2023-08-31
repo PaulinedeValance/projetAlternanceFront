@@ -12,11 +12,9 @@ const collectionStore = useCollectionStore()
 const userStore = useUserStore();
 const userId = userStore.id;
 
-//const { emit } = useContext()
-
 const userGames = ref<Games[]>([])
 
-const props = defineProps<{
+defineProps<{
     game: Games,
     displayHeartIcon?: Boolean,
     displayPlusIcon?: Boolean,
@@ -95,6 +93,31 @@ const removeFromCollection = async (gameId: any) => {
         console.error('Erreur lors de la suppression du jeu', error);
     }
 };
+
+const removeFromWishlist = async (gameId: any) => {
+    try {
+        const response = await fetch(`http://localhost:5000/api/user/wishlist/${userId}/${gameId}`, {
+            method: 'DELETE',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            userGames.value = userGames.value.filter(game => game._id !== gameId);
+            console.log('Jeu supprimé de la wishlist');
+        } else {
+            console.error('Échec de la suppression du jeu de la wishlist');
+        }
+    } catch (error) {
+        console.error('Erreur lors de la suppression du jeu', error);
+    }
+};
+
+
+const removeFromCollectionOrWishlist = (gameId: any) => {
+    removeFromCollection(gameId);
+    removeFromWishlist(gameId);
+}
+
 </script>
 
 <template>
@@ -105,7 +128,7 @@ const removeFromCollection = async (gameId: any) => {
             </div>
             <div class="game-name">{{ game.nom }}</div>
             <font-awesome-icon v-if="displayTrashIcon" :icon="'trash'" class="add-icon"
-                @click="removeFromCollection(game._id)" />
+                @click="removeFromCollectionOrWishlist(game._id)" />
             <font-awesome-icon v-if="displayHeartIcon" :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" />
             <font-awesome-icon v-if="displayPlusIcon" :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" />
         </div>

@@ -10,8 +10,6 @@ const userId = userStore.id
 
 const userGames = ref<Games[]>([])
 
-const displayTrash = true // Pour afficher l'icône de la poubelle
-
 const fetchUserGames = async () => {
   try {
     console.log('userId:', userId)
@@ -22,7 +20,6 @@ const fetchUserGames = async () => {
 
     if (response.ok) {
       const userGamesData = await response.json();
-      //userGames.value = userGamesData.games.map((game: Games) => ({ ...game, displayIcons: false }));
       userGames.value = userGamesData.games; // Je mets à jour la liste des jeux
 
     } else {
@@ -42,22 +39,6 @@ const handleGameRemoved = (gameId: string) => {
 </script>
 
 <template>
-  <!-- <DashboardLayout>
-    <div class="dashboard-container">
-      <div class="page-container">
-        <div class="game-container">
-          <div v-for="game in userGames" :key="game._id" class="game-card">
-            <div class="game-name">{{ game.nom }}</div>
-            <div class="image-container">
-              <img :src="game.imageURL" alt="Image du jeu" class="game-image">
-              <font-awesome-icon :icon="'trash'" class="add-icon" @click="removeFromCollection(game._id)" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </DashboardLayout> -->
-
   <DashboardLayout>
     <div class="dashboard-container">
       <div class="page-container">
@@ -65,8 +46,6 @@ const handleGameRemoved = (gameId: string) => {
           <!-- J'utilise GameCard dans ma boucle v-for -->
           <GameCard v-for="game in userGames" :key="game._id" :game="game" :displayTrashIcon="true"
             :displayHeartIcon="false" :displayPlusIcon="false" @game-removed="handleGameRemoved" />
-          <!-- <GameCard v-for="game in userGames" :key="game._id" :game="game" />
-          <font-awesome-icon :icon="'trash'" class="add-icon" @click="removeFromCollection(game._id)" /> -->
         </div>
       </div>
     </div>
