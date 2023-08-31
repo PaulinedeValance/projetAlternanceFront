@@ -3,11 +3,14 @@ import { useUserStore } from "@/stores/userState";
 import DashboardLayout from "../layouts/DashboardLayout.vue";
 import type { Games } from "@/types";
 import { ref } from 'vue';
+import GameCard from "../components/GameCard.vue"
 
 const userStore = useUserStore();
 const userId = userStore.id
 
 const userGames = ref<Games[]>([])
+
+const displayTrash = true // Pour afficher l'icône de la poubelle
 
 const fetchUserGames = async () => {
   try {
@@ -19,6 +22,7 @@ const fetchUserGames = async () => {
 
     if (response.ok) {
       const userGamesData = await response.json();
+      //userGames.value = userGamesData.games.map((game: Games) => ({ ...game, displayIcons: false }));
       userGames.value = userGamesData.games; // Je mets à jour la liste des jeux
 
     } else {
@@ -31,26 +35,14 @@ const fetchUserGames = async () => {
 
 fetchUserGames()
 
-const removeFromCollection = async (gameId: any) => {
-  try {
-    const response = await fetch(`http://localhost:5000/api/user/collection/${userId}/${gameId}`, {
-      method: 'DELETE',
-      credentials: 'include',
-    });
-
-    if (response.ok) {
-      userGames.value = userGames.value.filter(game => game._id !== gameId);
-    } else {
-      console.error('Échec de la suppression du jeu de la collection');
-    }
-  } catch (error) {
-    console.error('Erreur lors de la suppression du jeu', error);
-  }
+const handleGameRemoved = (gameId: string) => {
+  userGames.value = userGames.value.filter(game => game._id !== gameId);
 };
+
 </script>
 
 <template>
-  <DashboardLayout>
+  <!-- <DashboardLayout>
     <div class="dashboard-container">
       <div class="page-container">
         <div class="game-container">
@@ -61,6 +53,20 @@ const removeFromCollection = async (gameId: any) => {
               <font-awesome-icon :icon="'trash'" class="add-icon" @click="removeFromCollection(game._id)" />
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </DashboardLayout> -->
+
+  <DashboardLayout>
+    <div class="dashboard-container">
+      <div class="page-container">
+        <div class="game-container">
+          <!-- J'utilise GameCard dans ma boucle v-for -->
+          <GameCard v-for="game in userGames" :key="game._id" :game="game" :displayTrashIcon="true"
+            :displayHeartIcon="false" :displayPlusIcon="false" @game-removed="handleGameRemoved" />
+          <!-- <GameCard v-for="game in userGames" :key="game._id" :game="game" />
+          <font-awesome-icon :icon="'trash'" class="add-icon" @click="removeFromCollection(game._id)" /> -->
         </div>
       </div>
     </div>

@@ -71,17 +71,15 @@ const logout = () => {
         </div>
       </div>
     </div>
+
     <div class="page-container">
       <div>
         <div class="game-container">
-          <GameCard v-for="game in games" :key="game._id" :game="game" />
+          <GameCard v-for="game in games" :key="game._id" :game="game" :displayTrashIcon="false" :displayHeartIcon="true"
+            :displayPlusIcon="true" />
         </div>
       </div>
     </div>
-
-
-
-
   </DashboardLayout>
 </template>
 

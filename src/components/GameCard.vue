@@ -3,12 +3,26 @@ import router from "@/router";
 import { useCollectionStore } from "@/stores/gamesCollectionState";
 import { useUserStore } from "@/stores/userState";
 import type { Games } from "@/types";
+import { ref } from "vue";
+import { defineEmits } from 'vue';
+
+const emit = defineEmits(['game-removed']);
 
 const collectionStore = useCollectionStore()
 const userStore = useUserStore();
 const userId = userStore.id;
 
-defineProps<{ game: Games }>();
+//const { emit } = useContext()
+
+const userGames = ref<Games[]>([])
+
+const props = defineProps<{
+    game: Games,
+    displayHeartIcon?: Boolean,
+    displayPlusIcon?: Boolean,
+    displayTrashIcon?: Boolean,
+}>();
+
 
 const openDetail = (id: string) => {
     router.push(`/game/${id}`)
@@ -25,6 +39,7 @@ const addToCollection = async (gameId: any) => {
         });
 
         if (response.ok) {
+
             const addedGame = await response.json(); // Si l'API renvoie des informations sur le jeu ajouté
             collectionStore.addToCollection(addedGame); // Le store est mis à jour avec le jeu ajouté
 
@@ -57,6 +72,29 @@ const addToWishlist = async (gameId: any) => {
         console.error('Erreur lors de l\'ajout à la collection', error);
     }
 }
+
+const removeFromCollection = async (gameId: any) => {
+    try {
+        const response = await fetch(`http://localhost:5000/api/user/collection/${userId}/${gameId}`, {
+            method: 'DELETE',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            console.log('Game removed successfully');
+
+            userGames.value = userGames.value.filter(game => game._id !== gameId);
+            console.log('Updated userGames:', userGames.value);
+
+            // J'emets l'événement 'game-removed' avec l'ID du jeu en tant que données
+            emit('game-removed', gameId);
+        } else {
+            console.error('Échec de la suppression du jeu de la collection');
+        }
+    } catch (error) {
+        console.error('Erreur lors de la suppression du jeu', error);
+    }
+};
 </script>
 
 <template>
@@ -66,8 +104,10 @@ const addToWishlist = async (gameId: any) => {
                 <img :src="game.imageURL" alt="Image du jeu" class="game-image" @click="openDetail(game._id)">
             </div>
             <div class="game-name">{{ game.nom }}</div>
-            <font-awesome-icon :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" />
-            <font-awesome-icon :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" />
+            <font-awesome-icon v-if="displayTrashIcon" :icon="'trash'" class="add-icon"
+                @click="removeFromCollection(game._id)" />
+            <font-awesome-icon v-if="displayHeartIcon" :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" />
+            <font-awesome-icon v-if="displayPlusIcon" :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" />
         </div>
     </div>
 </template>
@@ -80,8 +120,8 @@ const addToWishlist = async (gameId: any) => {
 }
 
 .game-card {
-    width: 200px;
-    margin: 10px;
+    width: 220px;
+    margin: 30px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -101,8 +141,6 @@ const addToWishlist = async (gameId: any) => {
     max-width: 300px;
     max-height: 100%;
     width: 100%;
-    padding-left: 40px;
-    padding-right: 40px;
 }
 
 .game-name {
