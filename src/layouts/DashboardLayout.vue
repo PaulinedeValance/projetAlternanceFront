@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
                 class="icon-camera" />Ma collection</router-link></li>
           <li class="navbar-link"><router-link to="/userwishlist"><font-awesome-icon :icon="'list'"
                 class="icon-camera" />Wish list</router-link></li>
-          <li><a href="#"><font-awesome-icon :icon="'rotate-right'" class="icon-camera" />Générateur</a></li>
+          <li><a href="gamesgenerator"><font-awesome-icon :icon="'rotate-right'" class="icon-camera" />Générateur</a></li>
         </ul>
       </div>
       <div class="page-container">
