@@ -34,7 +34,7 @@ const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
 };
 
-console.log('store.username:', store.username);
+//console.log('store.username:', store.username);
 
 
 const logout = () => {

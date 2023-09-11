@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Cabin+Sketch:wght@700&family=Handlee&family=Pacifico&family=Patrick+Hand+SC&family=Sue+Ellen+Francisco&display=swap');
+html {
+  height: 100%;
+}
+
 body {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana,
-    sans-serif;
+  font-family: 'Bellota Text', cursive;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
