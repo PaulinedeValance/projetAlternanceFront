@@ -1,49 +1,53 @@
 <script setup lang="ts">
+import Footer from '@/components/Footer.vue';
 import Slider from "@/components/Slider.vue";
 import Button from "../components/Button.vue";
 import Input from "../components/Input.vue";
 import Modal from "../components/Modal.vue";
+import Login from "../components/Login.vue"
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userState";
 
 const router = useRouter();
 const showModal = ref(false);
-const email = ref<string>("");
-const password = ref<string>("");
+const email = ref<string>("toto@free.fr");
+const password = ref<string>("toto");
 
 const store = useUserStore();
-
 
 const openModal = () => {
   showModal.value = true
 }
 
-
 const closeModal = () => {
   showModal.value = false
 }
 
-
 const login = async () => {
+
   try {
     const response = await fetch("http://localhost:5000/api/login/user", {
       credentials: "include",
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
-        email: email.value,
+        username: email.value,
         password: password.value,
-
       }),
+      headers: {
+        "Content-Type": "application/json"
+      }
     });
 
     if (response.ok) {
-      const userData = await response.json()
+
+      const userData = (await response.json()).user
       store.setUser({ email: userData.email, username: userData.username, id: userData._id })
+
       router.push({ name: "dashboard" });
+    } else {
+      console.log("la réponse n'est pas ok");
+
     }
   } catch (error) {
     console.log("Erreur lors de la connexion :", error);
@@ -53,6 +57,7 @@ const login = async () => {
 
 <template>
   <h1>Page d'accueil</h1>
+  <img src="images/blob-pink.svg" alt="Description de l'image" />
   <div>
     <p class="text-homepage">
       L' Application Web pour vos jeux de société Simple, intuitive,
@@ -63,38 +68,33 @@ const login = async () => {
 
   <Button :name="'Se connecter à la ludothèque'" @click="openModal"></Button>
 
-  <div class="modal-container">
-    <Modal :isOpen="showModal" @close="closeModal">
-      <div class="modal-content">
-        <button @click="closeModal" class="close-button-modale">X</button>
-        <!-- <Button :name="'X'" @click="closeModal" class="custom-button"></Button> -->
-        <h2>Connexion</h2>
-        <form @submit.prevent class="login-form">
-          <div class="form-group">
-            <Input :type="'email'" placeholder="Email" v-model="email" :label-content="'Email'" />
-          </div>
+  <Modal v-model="showModal">
 
-          <div class="form-group">
-            <Input :type="'password'" placeholder="Mot de passe" v-model="password" :label-content="'Mot de passe'" />
-          </div>
+    <Login @close="showModal = false" />
 
+    <div class="modal-content">
+      <button @click="closeModal" class="close-button-modale">X</button>
+      <!-- <Button :name="'X'" @click="closeModal" class="custom-button"></Button> -->
+      <h2>Connexion</h2>
+      <form @submit.prevent="login" class="login-form">
+        <div class="form-group">
+          <Input :type="'email'" placeholder="Email" v-model="email" :label-content="'Email'" />
+        </div>
 
-
-          <div class="form-group">
-            <a href="#">Mot de passe oublié</a>
-          </div>
-
-          <button class="custom-button" @click="login">Se connecter</button>
-        </form>
-      </div>
-    </Modal>
-  </div>
+        <div class="form-group">
+          <Input :type="'password'" placeholder="Mot de passe" v-model="password" :label-content="'Mot de passe'" />
+        </div>
+        <button class="custom-button">Se connecter</button>
+      </form>
+    </div>
+  </Modal>
 
   <Slider />
+  <Footer />
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Cabin+Sketch:wght@700&family=Handlee&family=Pacifico&family=Patrick+Hand+SC&family=Sue+Ellen+Francisco&display=swap');
 
 .modal-container {
   display: flex;
@@ -103,28 +103,31 @@ const login = async () => {
 }
 
 .close-button-modale {
+  font-size: 19px;
+  color: #26517d;
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  font-size: 22px;
-  font-weight: bold;
-  background-color: transparent;
   border: none;
-  color: #00000094;
+  background: none;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  transition: ease filter, transform 0.3s;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transform-origin: center;
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid black;
-  width: 570px;
-  height: 360px;
   position: relative;
+  padding: 1rem 3rem;
+  background: white;
+  max-width: 400px;
+  height: 250px;
+  border-radius: 20px;
+  border: 2px solid #26517d;
+  box-shadow: 0 5px 30px 0 rgba(167, 97, 97, 0.1);
+  animation: fadeIn 1s ease both;
+  font-family: 'Bellota Text', cursive;
+
 }
 
 .login-form {

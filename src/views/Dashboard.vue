@@ -34,6 +34,8 @@ const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
 };
 
+console.log('store.username:', store.username);
+
 
 const logout = () => {
   // Appel à l'API de déconnexion
@@ -63,6 +65,7 @@ const logout = () => {
       <div class="dashboard-dropdown" @click="toggleDropdown">
         <div class="dashboard-avatar">
           <p>{{ store.username.charAt(0).toUpperCase() }}</p>
+
 
         </div>
         <div v-if="isDropdownOpen" class="dropdown-content">

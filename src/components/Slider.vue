@@ -11,22 +11,30 @@ const slides = [
 </script>
 
 <template>
-  <Carousel :wrap-around="true" :autoplay="3000">
-    <Slide v-for="slide in slides" :key="slide.id">
-      <div class="carousel__item">
-        <h3 class="carousel-title">{{ slide.title }}</h3>
-        <img :src="slide.img" alt="Carousel Image" />
-      </div>
-    </Slide>
+  <div class="carousel-container">
+    <Carousel :wrap-around="true" style="width: 500px;">
+      <Slide v-for="slide in slides" :key="slide.id">
+        <div class="carousel__item">
+          <h3 class="carousel-title">{{ slide.title }}</h3>
+          <img :src="slide.img" alt="Carousel Image" />
+        </div>
+      </Slide>
 
-    <template #addons>
-      <Navigation />
-    </template>
-  </Carousel>
+      <template #addons>
+        <Navigation />
+      </template>
+    </Carousel>
+  </div>
 </template>
 
-<style scoped>
+<style >
 @import url("https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Pacifico&display=swap");
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+}
+
 
 .carousel__item {
   min-height: 200px;
@@ -44,9 +52,8 @@ const slides = [
   font-family: "Didact Gothic", sans-serif;
 }
 
-/* .carousel__prev,
+.carousel__prev,
 .carousel__next {
   box-sizing: content-box;
-  border: 5px solid rgb(131, 51, 51);
-} */
+}
 </style>

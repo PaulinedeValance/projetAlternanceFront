@@ -4,7 +4,6 @@ import { useCollectionStore } from "@/stores/gamesCollectionState";
 import { useUserStore } from "@/stores/userState";
 import type { Games } from "@/types";
 import { ref } from "vue";
-import { defineEmits } from 'vue';
 
 const emit = defineEmits(['game-removed']);
 
