@@ -26,6 +26,16 @@ const router = createRouter({
       component: () => import('../views/SignUp.vue'),
     },
     {
+      path: '/faq',
+      name: 'faq',
+      component: () => import('../views/Faq.vue'),
+    },
+    {
+      path: '/legalnotes',
+      name: 'legalNotes',
+      component: () => import('../views/LegalNotes.vue'),
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/Dashboard.vue'),
@@ -47,6 +57,12 @@ const router = createRouter({
       path: '/game/:id',
       name: 'gameDetails',
       component: () => import('../views/GamesDetails.vue'),
+      meta: { layout: DashboardLayout },
+    },
+    {
+      path: '/gamesgenerator',
+      name: 'gamesGenerator',
+      component: () => import('../views/GamesGenerator.vue'),
       meta: { layout: DashboardLayout },
     },
   ],
