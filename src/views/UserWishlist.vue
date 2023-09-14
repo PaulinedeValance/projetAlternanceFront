@@ -4,6 +4,7 @@ import DashboardLayout from "../layouts/DashboardLayout.vue";
 import GameCard from "../components/GameCard.vue"
 import type { Games } from "@/types";
 import { ref } from 'vue';
+import jsPDF from 'jspdf';
 
 const userStore = useUserStore();
 const userId = userStore.id
@@ -36,6 +37,22 @@ const handleGameRemoved = (gameId: string) => {
   userGames.value = userGames.value.filter(game => game._id !== gameId);
 };
 
+const exportWishlistPDF = () => {
+  const wishlistData = userGames.value;
+  const pdf = new jsPDF();
+
+  // Génération du contenu du PDF à partir des données de la collection du user
+  const pdfContent = wishlistData.map((game) => {
+    return `${game.nom}`;
+  });
+
+  // Ajout du contenu au PDF (avec sa position sur le document)
+  pdf.text(pdfContent, 10, 10);
+
+  // Téléchargement du fichier au format PDF
+  pdf.save('MaWishlist.pdf');
+};
+
 
 </script>
 
@@ -43,6 +60,7 @@ const handleGameRemoved = (gameId: string) => {
   <DashboardLayout>
     <div class="dashboard-container">
       <div class="page-container">
+        <button @click="exportWishlistPDF">Exporter au format PDF</button>
         <div class="game-container">
           <!-- J'utilise GameCard dans ma boucle v-for -->
           <GameCard v-for="game in userGames" :key="game._id" :game="game" :displayTrashIcon="true"
