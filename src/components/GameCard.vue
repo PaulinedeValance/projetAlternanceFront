@@ -128,8 +128,8 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
             <div class="game-name">{{ game.nom }}</div>
             <font-awesome-icon v-if="displayTrashIcon" :icon="'trash'" class="add-icon"
                 @click="removeFromCollectionOrWishlist(game._id)" />
-            <font-awesome-icon v-if="displayHeartIcon" :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" />
             <font-awesome-icon v-if="displayPlusIcon" :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" />
+            <font-awesome-icon v-if="displayHeartIcon" :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" />
         </div>
     </div>
 </template>
