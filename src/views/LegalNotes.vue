@@ -7,21 +7,19 @@ import Footer from "@/components/Footer.vue";
         <h2 class="legal-title">Mentions légales</h2>
         <div class="paragraph-style">
             <h3>La Ruche Ludique</h3>
-            <p>Société par actions simplifiée au capital de [capital de la société] euros</p>
-            <p>Siège social : [adresse du siège social]</p>
-            <p>Immatriculée au RCS de [ville d'immatriculation] sous le numéro [numéro RCS]</p>
-            <p>Numéro de TVA intracommunautaire : [numéro de TVA]</p>
+            <p>Société par actions simplifiée au capital de 1 euros</p>
+            <p>Siège social : 37 rue Paul Lendrin</p>
+            <p>Immatriculée au RCS de Toulon sous le numéro B 517 403 572</p>
+            <p>Numéro de TVA intracommunautaire : FR 32 123456789</p>
         </div>
         <div class="paragraph-style">
             <h3>Directeur de la publication :</h3>
             <p>Pauline de Valance</p>
         </div>
 
-
-
         <div class="paragraph-style">
             <h3>Contact :</h3>
-            <p>[Adresse e-mail de contact]</p>
+            <p>pauline@gmail.com</p>
         </div>
 
         <div class="paragraph-style">
@@ -47,13 +45,6 @@ import Footer from "@/components/Footer.vue";
                 à la réglementation en vigueur. Pour plus d'informations sur notre politique de confidentialité, veuillez
                 consulter notre page dédiée à la vie privée.</p>
         </div>
-
-        <div class="paragraph-style">
-            <h3>Droit applicable :</h3>
-            <p>Les présentes mentions légales sont soumises au droit français. Tout litige relatif à l'interprétation ou à
-                l'exécution des présentes mentions légales sera de la compétence exclusive des tribunaux français.</p>
-        </div>
-
         <div class="paragraph-style">
             <h3>Modification des mentions légales :</h3>
             <p>Nous nous réservons le droit de modifier ces mentions légales à tout moment. Toute modification sera publiée
@@ -80,6 +71,10 @@ h3 {
 .paragraph-style {
     margin-left: 20px;
     margin-bottom: 40px;
+}
+
+.paragraph-style:last-of-type {
+    padding-bottom: 70px;
 }
 </style>
   
