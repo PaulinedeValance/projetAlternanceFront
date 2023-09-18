@@ -1,32 +1,57 @@
 <script setup lang="ts">
 import Button from './Button.vue'
 import Input from './Input.vue'
+import Footer from "@/components/Footer.vue";
 
-//const formData = ref()
 </script>
 
 <template>
-
     <form class="contact-form" @submit.prevent="">
-        <fieldset>
-            <h1>Contactez nous</h1>
-
-            <Input :placeholder="'Nom de famille'" :label-content="'Nom'" />
-            <Input :placeholder="'Prénom'" :label-content="'Prénom'" />
-            <Input :placeholder="'email'" :label-content="'Email'" />
+        <h1>Contactez nous</h1>
+        <div class="form-input">
+            <Input :type="'text'" :placeholder="'Nom de famille'" :labelContent="''" :modelValue="''" />
+        </div>
+        <div class="form-input">
+            <Input :type="'text'" :placeholder="'Prénom'" :labelContent="''" :modelValue="''" />
+        </div>
+        <div class="form-input">
+            <Input :type="'text'" :placeholder="'email'" :labelContent="''" :modelValue="''" />
+        </div>
+        <div class="form-input">
             <textarea type="email" placeholder="Message"></textarea>
+        </div>
 
-            <Button :name="'Envoyer'"></Button>
+        <Button :name="'Envoyer'"></Button>
 
-        </fieldset>
     </form>
-
+    <Footer />
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Pacifico&display=swap');
-
 form {
-  font-family: 'Didact Gothic', sans-serif;
+    width: 450px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.contact-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 18vh auto 0;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+
+}
+
+.form-input {
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
 }
 </style>

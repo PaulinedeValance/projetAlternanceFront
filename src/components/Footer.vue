@@ -23,7 +23,7 @@
     color: white;
     display: flex;
     align-items: center;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .footer-left {
@@ -43,6 +43,12 @@
     color: white;
     text-decoration: none;
     font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    footer {
+        font-size: 16px;
+    }
 }
 </style>
   
