@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-import NavBar from "./components/NavBar.vue";
+
 </script>
 
 <template>
-  <div>
+  <div class="app">
     <!-- <NavBar /> -->
   </div>
   <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped>
+.app {
+  position: relative;
+}
+</style>
