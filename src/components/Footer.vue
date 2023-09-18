@@ -11,7 +11,6 @@
             <router-link class="mentions-legales-link" to="/legalnotes">Mentions légales</router-link>
         </div>
     </footer>
-    <!-- <img src="images/wave.svg" alt="Description de l'image" /> -->
 </template>
 <style>
 .footer {
@@ -23,7 +22,6 @@
     color: white;
     display: flex;
     align-items: center;
-    /* padding: 10px; */
 }
 
 .footer-left {

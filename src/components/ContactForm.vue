@@ -48,10 +48,23 @@ form {
 
 .form-input {
     margin-bottom: 20px;
+
+
 }
 
 textarea {
     width: 100%;
     height: 100px;
+}
+
+@media (max-width: 767px) {
+    .contact-form {
+        width: 100%;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        border-radius: 0;
+
+    }
 }
 </style>
