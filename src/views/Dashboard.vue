@@ -96,27 +96,33 @@ const handleSearch = (searchQuery: string) => {
 <template>
   <DashboardLayout>
     <div class="dashboard-container">
-      <p class="welcome-title">Bienvenue sur le site de la Ruche Ludique, {{ store.username }}</p>
-      <div class="dashboard-dropdown" @click="toggleDropdown">
-        <div class="dashboard-avatar">
-          <p>{{ store.username.charAt(0).toUpperCase() }}</p>
+      <!-- Titre, avatar et barre de recherche -->
+      <div class="top-row">
+        <div class="header-content">
+          <p class="welcome-title">Bienvenue sur le site de la Ruche Ludique, {{ store.username }}</p>
         </div>
-        <div v-if="isDropdownOpen" class="dropdown-content">
-          <p>Bonjour, {{ store.username }}</p>
-          <button @click="logout">Déconnexion</button>
+        <div class="dashboard-dropdown" @click="toggleDropdown">
+          <div class="dashboard-avatar">
+            <p>{{ store.username.charAt(0).toUpperCase() }}</p>
+          </div>
+          <div v-if="isDropdownOpen" class="dropdown-content">
+            <p>Bonjour, {{ store.username }}</p>
+            <button @click="logout">Déconnexion</button>
+          </div>
         </div>
       </div>
+      <div class="search-bar-container">
+        <SearchBar v-on:search="handleSearch" />
+      </div>
+      <!-- Cartes des jeux -->
+      <div class="game-cards-container">
+        <GameCard v-for="game in filteredGames" :key="game._id" :game="game" :displayTrashIcon="false"
+          :displayHeartIcon="true" :displayPlusIcon="true" />
+      </div>
     </div>
-    <div class="search-bar-container">
-      <SearchBar v-on:search="handleSearch" />
-    </div>
-    <div class="page-container">
-      <GameCard v-for="game in filteredGames" :key="game._id" :game="game" :displayTrashIcon="false"
-        :displayHeartIcon="true" :displayPlusIcon="true" />
-    </div>
+
   </DashboardLayout>
 </template>
-
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Cabin+Sketch:wght@700&family=Didact+Gothic&family=Handlee&family=Londrina+Shadow&family=Pacifico&family=Patrick+Hand+SC&family=Rampart+One&family=Sue+Ellen+Francisco&display=swap');
@@ -124,9 +130,7 @@ const handleSearch = (searchQuery: string) => {
 .search {
   display: flex;
   justify-content: center;
-  /* Centrez horizontalement */
   align-items: center;
-  /* Centrez verticalement */
 
 }
 
@@ -142,15 +146,35 @@ const handleSearch = (searchQuery: string) => {
   align-items: flex-start;
   flex-wrap: wrap;
   margin-top: 20px;
-  margin-left: 270px;
+  margin-left: 115px;
 }
 
+
 .dashboard-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  color: #218e76ce;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  align-items: center;
+  text-align: center;
+
 }
+
+.top-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.game-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-left: 100px;
+  justify-content: center;
+}
+
 
 .dashboard-avatar {
   width: 39px;
