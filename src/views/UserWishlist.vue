@@ -60,7 +60,10 @@ const exportWishlistPDF = () => {
   <DashboardLayout>
     <div class="dashboard-container">
       <div class="page-container">
-        <button @click="exportWishlistPDF">Exporter au format PDF</button>
+        <div class="title-button-container">
+          <h2 class="wishlist-title">Ma wishlist</h2>
+          <button class="pdf-button" @click="exportWishlistPDF">Exporter en PDF</button>
+        </div>
         <div class="game-container">
           <!-- J'utilise GameCard dans ma boucle v-for -->
           <GameCard v-for="game in userGames" :key="game._id" :game="game" :displayTrashIcon="true"
@@ -71,15 +74,6 @@ const exportWishlistPDF = () => {
   </DashboardLayout>
 </template>
 <style scoped>
-.page-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin-top: 20px;
-  margin-left: 270px;
-}
-
 .dashboard-container {
   display: flex;
   justify-content: flex-end;
@@ -87,7 +81,28 @@ const exportWishlistPDF = () => {
   color: #218e76ce;
 }
 
-.add-icon {
-  color: #218e76ce
+.title-button-container {
+  text-align: center;
+}
+
+.wishlist-title {
+  font-size: 37px;
+}
+
+.pdf-button {
+  background-color: white;
+  border-radius: 28px;
+  border: 1.9px solid #218e76ce;
+  display: inline-block;
+  cursor: pointer;
+  color: #347d6de6;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 12px 17px;
+}
+
+.pdf-button:hover {
+  background-color: #218e76ce;
+  color: white;
 }
 </style>
