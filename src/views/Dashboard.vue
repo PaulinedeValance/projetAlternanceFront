@@ -91,6 +91,7 @@ const handleSearch = (searchQuery: string) => {
   }
 };
 
+
 </script>
 
 <template>
@@ -107,10 +108,11 @@ const handleSearch = (searchQuery: string) => {
           </div>
           <div v-if="isDropdownOpen" class="dropdown-content">
             <p>Bonjour, {{ store.username }}</p>
-            <button @click="logout">Déconnexion</button>
+            <button class="logout-button" @click="logout">Déconnexion</button>
           </div>
         </div>
       </div>
+      <a class="logout-button-responsive" @click="logout">Déconnexion</a>
       <div class="search-bar-container">
         <SearchBar v-on:search="handleSearch" />
       </div>
@@ -141,12 +143,12 @@ const handleSearch = (searchQuery: string) => {
 }
 
 .page-container {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
   margin-top: 20px;
-  margin-left: 115px;
+  margin-left: 115px; */
 }
 
 
@@ -170,9 +172,7 @@ const handleSearch = (searchQuery: string) => {
 .game-cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  margin-left: 100px;
-  justify-content: center;
+  margin-left: 50px;
 }
 
 
@@ -194,5 +194,54 @@ const handleSearch = (searchQuery: string) => {
 .search-bar-container {
   display: flex;
   justify-content: center;
+}
+
+.logout-link {
+  color: rgb(90, 142, 90);
+}
+
+@media screen and (min-width: 200px) and (max-width: 768px) {
+  .welcome-title {
+    font-size: 19px;
+  }
+}
+
+@media screen and (min-width: 200px) and (max-width: 1024px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+
+  }
+
+  .game-cards-container {
+    margin-left: 0;
+
+  }
+
+  .dashboard-avatar {
+    display: none;
+  }
+
+  .dropdown-content .logout-button {
+    display: block;
+  }
+
+}
+
+.logout-button-responsive {
+  color: #218e76ce;
+  font-size: 19px;
+}
+
+@media screen and (min-width: 768px) {
+  .logout-button-responsive {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 820px) {
+  .welcome-title {
+    margin: 0 auto;
+    font-size: 37px;
+  }
 }
 </style>
