@@ -5,6 +5,15 @@ import { useUserStore } from "@/stores/userState";
 import type { Games } from "@/types";
 import { ref } from "vue";
 
+// type GameDetails = Games & {
+//     description?: string
+//     nbJoueurs: number
+//     dureePartie: number
+//     categorie: string
+// }
+
+// const game = ref<GameDetails>()
+
 const emit = defineEmits(['game-removed']);
 
 const collectionStore = useCollectionStore()
@@ -119,7 +128,7 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
 
 </script>
 
-<template>
+<!-- <template>
     <div class="game-container">
         <div class="game-card">
             <div class="image-container">
@@ -132,7 +141,57 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
             <font-awesome-icon v-if="displayHeartIcon" :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" />
         </div>
     </div>
+</template> -->
+<template>
+    <!-- <div class="game-container">
+        <div class="game-card myCard">
+            <div class="innerCard">
+               
+                <div class="frontSide">
+                    <div class="image-container">
+                        <img :src="game.imageURL" alt="Image du jeu" class="game-image" @click="openDetail(game._id)">
+                    </div>
+                    <div class="game-name">{{ game.nom }}</div>
+                </div>
+                
+                <div class="backSide">
+                    <p>test</p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="game-container">
+
+        <div class="card-container">
+            <div class="myCard" @click="openDetail(game._id)">
+                <font-awesome-icon v-if="displayTrashIcon" :icon="'trash'" class="add-icon"
+                    @click.stop="removeFromCollectionOrWishlist(game._id)" />
+                <font-awesome-icon v-if="displayPlusIcon" :icon="'plus'" class="add-icon"
+                    @click.stop="addToCollection(game._id)" />
+                <font-awesome-icon v-if="displayHeartIcon" :icon="'heart'" class="add-icon"
+                    @click.stop="addToWishlist(game._id)" />
+                <div class="innerCard">
+                    <div class="frontSide">
+                        <div class="image-container">
+                            <img :src="game.imageURL" alt="Image du jeu" class="game-image">
+                        </div>
+                        <hr class="card-divider">
+                        <h3 class="game-name">{{ game.nom }}</h3>
+                    </div>
+                    <div class="backSide">
+                        <h3 class="game-name">{{ game.nom }}</h3>
+                        <img src="images/sablier.png" class="icon-cards" alt="sablier">
+                        <h4>Durée d'une partie : {{ game?.dureePartie }} minutes</h4>
+                        <h4>Nombre de joueurs : {{ game.nbJoueurs }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
+
+  
 
 <style>
 .image-container {
@@ -141,50 +200,174 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
     align-items: center;
 }
 
-.game-card {
-    width: 220px;
-    margin: 30px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+hr {
+    border: none;
+    border-top: 3px double #218e76ce;
+    color: #333;
+    overflow: visible;
     text-align: center;
+    height: 5px;
 }
 
-/* .game-card {
-    width: 100px;
-    margin: 20px;
-    padding: 40px;
-    text-align: center;
-    border-radius: 30px;
-    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
-} */
 
-.game-image {
-    max-width: 300px;
-    max-height: 100%;
+
+
+hr:after {
+    background: #fff;
+    content: 'o';
+    padding: 0 4px;
+    position: relative;
+    top: -13px;
+    color: #218e76ce;
+}
+
+.card-divider {
     width: 100%;
+    /* Faites en sorte que la ligne prenne toute la largeur */
+    margin-top: 10px;
+    /* Ajoutez de l'espace en haut de la ligne (ajustez selon vos préférences) */
+    margin-bottom: 10px;
+    /* Ajoutez de l'espace en bas de la ligne (ajustez selon vos préférences) */
+    border: none;
+    /* Supprimez le bord de la ligne */
+    border-top: 1px solid #218e76ce;
+    /* Ajoutez une ligne horizontale */
 }
 
-.game-name {
-    font-size: 20px;
-    margin-bottom: 30px;
-    font-family: 'Bellota Text', cursive;
-}
-
-.game-container {
+.card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 30px;
+    /* Centrez horizontalement les cartes */
+    margin-left: 50px;
 }
+
+/* .game-container {
+    margin-left: 0;
+    padding-left: 0;
+
+} */
+
+/* .myCard {
+    background-color: transparent;
+    width: 190px;
+    height: 254px;
+    perspective: 1000px;
+    margin-bottom: 30px;
+    margin-top: 67px;
+    margin-right: 10px;
+} */
+.myCard {
+    background-color: transparent;
+    width: 250px;
+    height: 387px;
+    perspective: 1000px;
+    margin-bottom: 30px;
+    margin-top: 67px;
+    margin-right: 10px;
+}
+
+
+.title {
+    font-size: 1.5em;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+}
+
+.innerCard {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.myCard:hover .innerCard {
+    transform: rotateY(180deg);
+}
+
+.frontSide,
+.backSide {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: 1px solid #218e76ce;
+    border-radius: 1rem;
+    color: #218e76ce;
+    /* box-shadow: 0 0 0.3em rgba(255, 255, 255, 0.5); */
+    font-weight: 700;
+}
+
+
+.backSide {
+    transform: rotateY(180deg);
+}
+
+.frontSide::before,
+.backSide::before {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: '';
+    width: 110%;
+    height: 110%;
+    position: absolute;
+    z-index: -1;
+    border-radius: 1em;
+    filter: blur(20px);
+    animation: animate 5s linear infinite;
+}
+
+.game-image {
+    max-width: 100%;
+    max-height: 180px;
+}
+
+.icon-cards {
+    color: dodgerblue;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0.3;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
+}
+
 
 .add-icon {
     cursor: pointer;
     padding: 7px;
     transition: transform 0.3s ease-in-out;
+    color: #218e76ce;
+    margin-bottom: 10px;
 }
 
 .add-icon:hover {
     transform: scale(1.7);
+}
+
+@media screen and (max-width: 768px) {
+    .game-container {
+
+        margin: 0 auto;
+    }
+
 }
 </style>
