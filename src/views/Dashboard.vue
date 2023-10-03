@@ -138,7 +138,7 @@ const handleSearch = (searchQuery: string) => {
 
 .welcome-title {
   font-family: 'Patrick Hand SC', cursive;
-  margin: 6px 10px 0 auto;
+  margin: 20px 10px 0 auto;
   font-size: 32px;
 }
 
@@ -186,8 +186,8 @@ const handleSearch = (searchQuery: string) => {
   justify-content: center;
   font-size: 18px;
   color: #fff;
-  margin-right: 10px;
-  margin-top: 10px;
+  margin-left: 7px;
+  margin-top: 24px;
   cursor: pointer;
 }
 
