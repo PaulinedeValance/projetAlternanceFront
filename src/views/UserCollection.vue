@@ -56,14 +56,17 @@ const exportCollectionPDF = () => {
 </script>
 <template>
   <DashboardLayout>
-
     <div class="dashboard-container">
       <div class="page-container">
+        <router-link to="/dashboard">
+          <p class="dashboard-link">Retour Dashboard</p>
+        </router-link>
         <div class="title-button-container">
           <h2 class="collection-title">Ma collection</h2>
+
           <button class="pdf-button" @click="exportCollectionPDF">Exporter en PDF</button>
         </div>
-        <div class="game-container">
+        <div class="game-cards-container">
           <!-- J'utilise GameCard dans ma boucle v-for -->
           <GameCard v-for="game in userGames" :key="game._id" :game="game" :displayTrashIcon="true"
             :displayHeartIcon="false" :displayPlusIcon="false" @game-removed="handleGameRemoved" />
@@ -77,8 +80,9 @@ const exportCollectionPDF = () => {
 .dashboard-container {
   display: flex;
   justify-content: flex-end;
-  align-items: flex-start;
   color: #218e76ce;
+  align-items: center;
+  text-align: center;
 }
 
 .title-button-container {
@@ -87,6 +91,12 @@ const exportCollectionPDF = () => {
 
 .collection-title {
   font-size: 37px;
+}
+
+.game-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  margin-left: 50px;
 }
 
 .pdf-button {
@@ -106,6 +116,13 @@ const exportCollectionPDF = () => {
 .pdf-button:hover {
   background-color: #218e76ce;
   color: white;
+}
+
+.dashboard-link {
+  color: #218e76ce;
+  font-style: italic;
+  font-size: 17px;
+  text-align: center;
 }
 </style>
 

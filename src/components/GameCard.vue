@@ -3,7 +3,7 @@ import router from "@/router";
 import { useCollectionStore } from "@/stores/gamesCollectionState";
 import { useUserStore } from "@/stores/userState";
 import type { Games } from "@/types";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 // type GameDetails = Games & {
 //     description?: string
@@ -21,6 +21,21 @@ const userStore = useUserStore();
 const userId = userStore.id;
 
 const userGames = ref<Games[]>([])
+
+const gameAdded = ref(false);
+
+const addFlashClass = () => {
+    gameAdded.value = true;
+    setTimeout(() => {
+        gameAdded.value = false;
+    }, 3000); // Ici, l'animation s'arrêtera après 1 seconde (ajustez si nécessaire)
+};
+
+watch(gameAdded, (newValue: any) => {
+    if (newValue) {
+        addFlashClass();
+    }
+});
 
 defineProps<{
     game: Games,
@@ -48,6 +63,7 @@ const addToCollection = async (gameId: any) => {
 
             const addedGame = await response.json(); // Si l'API renvoie des informations sur le jeu ajouté
             collectionStore.addToCollection(addedGame); // Le store est mis à jour avec le jeu ajouté
+            gameAdded.value = true;
 
         } else {
             console.error('Échec de l\'ajout à la collection');
@@ -128,49 +144,18 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
 
 </script>
 
-<!-- <template>
-    <div class="game-container">
-        <div class="game-card">
-            <div class="image-container">
-                <img :src="game.imageURL" alt="Image du jeu" class="game-image" @click="openDetail(game._id)">
-            </div>
-            <div class="game-name">{{ game.nom }}</div>
-            <font-awesome-icon v-if="displayTrashIcon" :icon="'trash'" class="add-icon"
-                @click="removeFromCollectionOrWishlist(game._id)" />
-            <font-awesome-icon v-if="displayPlusIcon" :icon="'plus'" class="add-icon" @click="addToCollection(game._id)" />
-            <font-awesome-icon v-if="displayHeartIcon" :icon="'heart'" class="add-icon" @click="addToWishlist(game._id)" />
-        </div>
-    </div>
-</template> -->
 <template>
-    <!-- <div class="game-container">
-        <div class="game-card myCard">
-            <div class="innerCard">
-               
-                <div class="frontSide">
-                    <div class="image-container">
-                        <img :src="game.imageURL" alt="Image du jeu" class="game-image" @click="openDetail(game._id)">
-                    </div>
-                    <div class="game-name">{{ game.nom }}</div>
-                </div>
-                
-                <div class="backSide">
-                    <p>test</p>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     <div class="game-container">
-
         <div class="card-container">
             <div class="myCard" @click="openDetail(game._id)">
                 <font-awesome-icon v-if="displayTrashIcon" :icon="'trash'" class="add-icon"
                     @click.stop="removeFromCollectionOrWishlist(game._id)" />
                 <font-awesome-icon v-if="displayPlusIcon" :icon="'plus'" class="add-icon"
-                    @click.stop="addToCollection(game._id)" />
+                    @click.stop="addToCollection(game._id)"
+                    :class="{ 'flash-animation': gameAdded, 'color-change-animation': gameAdded, }" />
                 <font-awesome-icon v-if="displayHeartIcon" :icon="'heart'" class="add-icon"
                     @click.stop="addToWishlist(game._id)" />
+
                 <div class="innerCard">
                     <div class="frontSide">
                         <div class="image-container">
@@ -223,40 +208,19 @@ hr:after {
 
 .card-divider {
     width: 100%;
-    /* Faites en sorte que la ligne prenne toute la largeur */
     margin-top: 10px;
-    /* Ajoutez de l'espace en haut de la ligne (ajustez selon vos préférences) */
     margin-bottom: 10px;
-    /* Ajoutez de l'espace en bas de la ligne (ajustez selon vos préférences) */
     border: none;
-    /* Supprimez le bord de la ligne */
     border-top: 1px solid #218e76ce;
-    /* Ajoutez une ligne horizontale */
 }
 
 .card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* Centrez horizontalement les cartes */
     margin-left: 50px;
 }
 
-/* .game-container {
-    margin-left: 0;
-    padding-left: 0;
-
-} */
-
-/* .myCard {
-    background-color: transparent;
-    width: 190px;
-    height: 254px;
-    perspective: 1000px;
-    margin-bottom: 30px;
-    margin-top: 67px;
-    margin-right: 10px;
-} */
 .myCard {
     background-color: transparent;
     width: 250px;
@@ -324,7 +288,6 @@ hr:after {
     z-index: -1;
     border-radius: 1em;
     filter: blur(20px);
-    animation: animate 5s linear infinite;
 }
 
 .game-image {
@@ -335,21 +298,6 @@ hr:after {
 .icon-cards {
     color: dodgerblue;
 }
-
-@keyframes animate {
-    0% {
-        opacity: 0.3;
-    }
-
-    80% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0.3;
-    }
-}
-
 
 .add-icon {
     cursor: pointer;
@@ -369,5 +317,24 @@ hr:after {
         margin: 0 auto;
     }
 
+}
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.flash-animation {
+    animation: flash 1s infinite;
+    color: crimson;
 }
 </style>
