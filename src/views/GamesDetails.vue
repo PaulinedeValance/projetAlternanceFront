@@ -27,7 +27,7 @@ onMounted(async () => {
     <div class="page-container">
         <h2 class="game-title">{{ game?.nom }}</h2>
         <div class="game-details-container">
-            <img :src="game?.imageURL" alt="Image du jeu" class="game-image" />
+            <img :src="game?.imageURL" alt="Image du jeu" class="game-image-detail" />
             <div class="game-details">
                 <h4>Nombre de joueurs : {{ game?.nbJoueurs }}</h4>
                 <h4>Durée d'une partie : {{ game?.dureePartie }} minutes</h4>
@@ -62,12 +62,13 @@ onMounted(async () => {
     font-size: 32px;
 }
 
-.game-image {
+.game-image-detail {
     width: 25%;
     height: auto;
     margin-top: 10px;
     margin-left: 30px;
 }
+
 
 @media screen and (max-width: 768px) {
     .page-container {
