@@ -12,8 +12,6 @@ const toggleMenu = () => {
   showMenu.value = !showMenu.value;
 };
 
-
-
 </script>
 
 <template>
@@ -24,8 +22,6 @@ const toggleMenu = () => {
         <span :class="{ 'active': sidebarOpen }"></span>
         <span :class="{ 'active': sidebarOpen }"></span>
       </div>
-
-
       <!-- Menu déroulant de mon burger menu -->
       <ul class="menu-items" :class="{ 'show-menu': showMenu }">
         <li class="navbar-link"><router-link to="/usercollection"><font-awesome-icon :icon="'puzzle-piece'"
@@ -68,12 +64,6 @@ const toggleMenu = () => {
   width: 250px;
   height: auto;
 }
-
-/* .logo-img {
-  width: 250px;
-  height: auto;
-  margin-left: 200px;
-} */
 
 nav {
   display: flex;
@@ -128,15 +118,12 @@ a {
   color: #fff;
   display: flex;
   flex-direction: column;
-  /* Affiche les éléments en colonne */
   justify-content: space-between;
-  /* Espace entre le haut et le bas */
 }
 
 .sidebar ul {
   padding: 40px;
   flex-grow: 1;
-  /* Permet au contenu de prendre tout l'espace disponible */
 }
 
 .icon-camera {
@@ -144,23 +131,23 @@ a {
   margin-right: 15px;
 }
 
-/* 
+
 .flex-container {
   display: flex;
-} */
+}
 
-@media screen and (min-width: 769px) {
+/* Règle spécifique pour désactiver "display: flex" en mode mobile */
+@media screen and (max-width: 768px) {
   .flex-container {
-    display: flex;
-    /* Appliquer display: flex uniquement sur les écrans larges */
+    display: block;
   }
 }
 
 
-@media screen and (min-width: 769px) and (max-width: 820px) {
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
   .flex-container {
     display: block;
-    /* Appliquer display: flex uniquement sur les écrans larges */
   }
 }
 
@@ -217,30 +204,40 @@ a {
 }
 
 
-
-/* teeeeeest */
-
-
 @media screen and (min-width: 200px) and (max-width: 1024px) {
   .menu-icon {
-    display: block;
-    /* Affiche l'icône du menu hamburger en mode mobile */
+    display: inline-block;
+
   }
 
   .page-container {
     margin-left: 0;
     padding-left: 0;
-    /* Aucune marge à gauche pour les petits écrans */
+
   }
 
   .sidebar {
     transform: translateX(-255px);
-    /* Masquer la barre latérale */
+
   }
 
   .sidebar.closed {
     transform: translateX(-255px);
-    /* Masquer la barre latérale */
+
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .back-to-dashboard-link {
+    display: none;
+  }
+}
+
+/* Aligner le lien avec le burger menu en mode responsive */
+@media screen and (max-width: 768px) {
+  .back-to-dashboard-link {
+    display: block;
+    margin-top: 20px;
   }
 }
 </style>
