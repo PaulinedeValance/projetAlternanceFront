@@ -28,6 +28,7 @@ const fetchGames = async () => {
 
 onMounted(async () => {
   await fetchGames();
+  console.log("jeux :", filteredGames)
 
 })
 
@@ -91,13 +92,11 @@ const handleSearch = (searchQuery: string) => {
   }
 };
 
-
 </script>
 
 <template>
   <DashboardLayout>
     <div class="dashboard-container">
-      <!-- Titre, avatar et barre de recherche -->
       <div class="top-row">
         <div class="header-content">
           <p class="welcome-title">Bienvenue sur le site de la Ruche Ludique, {{ store.username }}</p>
@@ -142,23 +141,12 @@ const handleSearch = (searchQuery: string) => {
   font-size: 32px;
 }
 
-.page-container {
-  /* display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin-top: 20px;
-  margin-left: 115px; */
-}
-
-
 .dashboard-container {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 20px;
   align-items: center;
   text-align: center;
-
 }
 
 .top-row {
@@ -203,6 +191,7 @@ const handleSearch = (searchQuery: string) => {
 @media screen and (min-width: 200px) and (max-width: 768px) {
   .welcome-title {
     font-size: 19px;
+    margin: 0;
   }
 }
 
