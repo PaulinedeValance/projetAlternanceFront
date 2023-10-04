@@ -5,14 +5,15 @@ import { useUserStore } from "@/stores/userState";
 import type { Games } from "@/types";
 import { ref, watch } from "vue";
 
-// type GameDetails = Games & {
-//     description?: string
-//     nbJoueurs: number
-//     dureePartie: number
-//     categorie: string
-// }
+type GameDetails = Games & {
+    description?: string
+    nbJoueurs: number
+    dureePartie: number
+    categorie: string
+    imageURL: string;
+}
 
-// const game = ref<GameDetails>()
+//const game = ref<GameDetails>()
 
 const emit = defineEmits(['game-removed']);
 
@@ -28,7 +29,7 @@ const addFlashClass = () => {
     gameAdded.value = true;
     setTimeout(() => {
         gameAdded.value = false;
-    }, 3000); // Ici, l'animation s'arrêtera après 1 seconde (ajustez si nécessaire)
+    }, 3000); // Durée de l'animation, 3 secondes
 };
 
 watch(gameAdded, (newValue: any) => {
@@ -165,10 +166,11 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
                         <h3 class="game-name">{{ game.nom }}</h3>
                     </div>
                     <div class="backSide">
-                        <h3 class="game-name">{{ game.nom }}</h3>
-                        <img src="images/sablier.png" class="icon-cards" alt="sablier">
-                        <h4>Durée d'une partie : {{ game?.dureePartie }} minutes</h4>
+                        <h2 class="game-name">{{ game.nom }}</h2>
+                        <!-- <img src="images/sablier.png" class="icon-cards" alt="sablier"> -->
+                        <h4>Durée d'une partie : {{ game.dureePartie }} minutes</h4>
                         <h4>Nombre de joueurs : {{ game.nbJoueurs }}</h4>
+                        <h4>Catégorie : {{ game.categorie }}</h4>
                     </div>
                 </div>
             </div>
@@ -179,6 +181,14 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
   
 
 <style>
+/* Permet de résoudre le problème sous Firefox avec le hover des cards  */
+@-moz-document url-prefix() {
+    .innerCard {
+        backface-visibility: hidden;
+    }
+}
+
+
 .image-container {
     display: flex;
     justify-content: center;
@@ -193,9 +203,6 @@ hr {
     text-align: center;
     height: 5px;
 }
-
-
-
 
 hr:after {
     background: #fff;
@@ -239,26 +246,44 @@ hr:after {
     margin: 0;
 }
 
+
 .innerCard {
     position: relative;
     width: 100%;
     height: 100%;
     text-align: center;
+    -webkit-transition: -webkit-transform 0.8s;
+    transition: -webkit-transform 0.8s;
+    -o-transition: transform 0.8s;
     transition: transform 0.8s;
+    transition: transform 0.8s, -webkit-transform 0.8s;
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     cursor: pointer;
 }
 
+
 .myCard:hover .innerCard {
+    -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
+
 
 .frontSide,
 .backSide {
     position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: space-evenly;
+    -ms-flex-pack: space-evenly;
     justify-content: space-evenly;
     width: 100%;
     height: 100%;
@@ -267,12 +292,12 @@ hr:after {
     border: 1px solid #218e76ce;
     border-radius: 1rem;
     color: #218e76ce;
-    /* box-shadow: 0 0 0.3em rgba(255, 255, 255, 0.5); */
     font-weight: 700;
 }
 
 
 .backSide {
+    -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
 
@@ -280,6 +305,8 @@ hr:after {
 .backSide::before {
     top: 50%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     content: '';
     width: 110%;
@@ -287,8 +314,8 @@ hr:after {
     position: absolute;
     z-index: -1;
     border-radius: 1em;
-    filter: blur(20px);
 }
+
 
 .game-image {
     max-width: 100%;
@@ -313,11 +340,24 @@ hr:after {
 
 @media screen and (max-width: 768px) {
     .game-container {
-
         margin: 0 auto;
     }
 
+
+    .myCard {
+        margin-right: 0;
+    }
+
 }
+
+@media screen and (max-width: 1024px) {
+    .card-container {
+        margin-left: 0px;
+    }
+}
+
+
+
 
 @keyframes flash {
     0% {
