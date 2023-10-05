@@ -149,8 +149,8 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
     <div class="game-container">
         <div class="card-container">
             <div class="myCard" @click="openDetail(game._id)">
-                <font-awesome-icon v-if="displayTrashIcon" :icon="'trash'" class="add-icon"
-                    @click.stop="removeFromCollectionOrWishlist(game._id)" />
+                <!-- <font-awesome-icon v-if="displayTrashIcon" :icon="'trash'" class="add-icon"
+                    @click.stop="removeFromCollectionOrWishlist(game._id)" /> -->
                 <font-awesome-icon v-if="displayPlusIcon" :icon="'plus'" class="add-icon"
                     @click.stop="addToCollection(game._id)"
                     :class="{ 'flash-animation': gameAdded, 'color-change-animation': gameAdded, }" />
@@ -173,6 +173,8 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
                         <h4>Catégorie : {{ game.categorie }}</h4>
                     </div>
                 </div>
+                <font-awesome-icon v-if="displayTrashIcon" :icon="'trash'" class="add-icon"
+                    @click.stop="removeFromCollectionOrWishlist(game._id)" />
             </div>
         </div>
     </div>
@@ -331,7 +333,8 @@ hr:after {
     padding: 7px;
     transition: transform 0.3s ease-in-out;
     color: #218e76ce;
-    margin-bottom: 10px;
+    margin-top: 10px;
+
 }
 
 .add-icon:hover {
