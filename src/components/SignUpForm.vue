@@ -6,11 +6,21 @@ import { useRouter } from "vue-router";
 
 const username = ref<string>("");
 const email = ref<string>("");
+const emailError = ref<string>('');
 const password = ref<string>("");
 const passwordRepeat = ref<string>("");
 const passwordError = ref<string>("");
 const showPassword = ref(false);
 const router = useRouter();
+
+const validateEmail = () => {
+  // Regex pour vérifier le format de l'email
+  const emailValidation = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // On vérifie si la valeur de l'e-mail match la regex
+  const isValid = emailValidation.test(email.value);
+  emailError.value = isValid ? '' : "L'e-mail n'est pas valide.";
+  return isValid;
+};
 
 const validatePassword = () => {
   if (password.value.length < 8) {
@@ -22,7 +32,15 @@ const validatePassword = () => {
   }
 };
 
+
 const createAccount = () => {
+  const isEmailValid = validateEmail();
+
+  if (!isEmailValid) {
+    // Si l'e-mail n'est pas valide, je ne fais pas la redirection
+    return;
+  }
+
   const isPasswordValid = validatePassword();
 
   if (!isPasswordValid || password.value !== passwordRepeat.value) {
@@ -51,7 +69,7 @@ const createAccount = () => {
     .then((response) => {
       if (response.ok) {
         console.log("Compte utilisateur créé avec succès");
-        router.push({ name: "jeux" });
+        router.push({ name: "home" });
       }
     })
     .catch((error) => {
@@ -61,53 +79,30 @@ const createAccount = () => {
 </script>
 
 <template>
-  <form class="contact-form center-form" @submit.prevent="">
+  <form class="contact-form" @submit.prevent="">
     <h1>Créez votre compte</h1>
     <div class="form-input">
-      <Input
-        v-model="username"
-        :placeholder="'Username'"
-        :label-content="'Username'"
-        :type="'text'"
-      />
+      <Input v-model="username" :placeholder="'Username'" :label-content="'Username'" :type="'text'" />
     </div>
     <div class="form-input">
-      <Input
-        v-model="email"
-        :placeholder="'email'"
-        :label-content="'Email'"
-        :type="'email'"
-      />
+      <Input v-model="email" placeholder="Email" labelContent="E-mail" type="email" @blur="validateEmail" />
+      <div v-if="emailError" class="error-message">{{ emailError }}</div>
     </div>
     <div class="form-input">
       <div class="password-input-wrapper">
-        <Input
-          v-model="password"
-          :placeholder="'password'"
-          :label-content="'Mot de passe'"
-          :type="showPassword ? 'text' : 'password'"
-        />
+        <Input v-model="password" :placeholder="'password'" :label-content="'Mot de passe'"
+          :type="showPassword ? 'text' : 'password'" />
         <span @click="showPassword = !showPassword">
-          <font-awesome-icon
-            :icon="showPassword ? 'eye-slash' : 'eye'"
-            class="password-toggle-icon"
-          />
+          <font-awesome-icon :icon="showPassword ? 'eye-slash' : 'eye'" class="password-toggle-icon" />
         </span>
       </div>
     </div>
     <div class="form-input">
       <div class="password-input-wrapper">
-        <Input
-          v-model="passwordRepeat"
-          :placeholder="'password'"
-          :label-content="'Répéter le mot de passe'"
-          :type="showPassword ? 'text' : 'password'"
-        />
+        <Input v-model="passwordRepeat" :placeholder="'password'" :label-content="'Répéter le mot de passe'"
+          :type="showPassword ? 'text' : 'password'" />
         <span @click="showPassword = !showPassword">
-          <font-awesome-icon
-            :icon="showPassword ? 'eye-slash' : 'eye'"
-            class="password-toggle-icon"
-          />
+          <font-awesome-icon :icon="showPassword ? 'eye-slash' : 'eye'" class="password-toggle-icon" />
         </span>
       </div>
     </div>
@@ -117,11 +112,8 @@ const createAccount = () => {
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Pacifico&display=swap");
-
 form {
-  font-family: "Didact Gothic", sans-serif;
-  width: 700px;
+  width: 550px;
   border: 1px solid #ccc;
   padding: 20px;
   box-sizing: border-box;
@@ -132,11 +124,11 @@ form {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 18vh auto 0;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
 }
 
-.center-form {
-  margin: 0 auto;
-}
 
 .form-input {
   margin-bottom: 20px;
@@ -158,5 +150,17 @@ form {
   color: crimson;
   font-weight: bold;
   font-size: 18px;
+  margin-top: 5px;
+}
+
+@media (max-width: 767px) {
+  .contact-form {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+
+  }
 }
 </style>

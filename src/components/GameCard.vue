@@ -235,7 +235,7 @@ hr:after {
     perspective: 1000px;
     margin-bottom: 30px;
     margin-top: 67px;
-    margin-right: 10px;
+    margin-right: 40px;
 }
 
 
