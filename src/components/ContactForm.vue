@@ -10,12 +10,15 @@ import Footer from "@/components/Footer.vue";
         <h1>Contactez nous</h1>
         <div class="form-input">
             <Input :type="'text'" :placeholder="'Nom de famille'" :labelContent="''" :modelValue="''" />
+            <label class="sr-only">Nom de famille</label>
         </div>
         <div class="form-input">
             <Input :type="'text'" :placeholder="'Prénom'" :labelContent="''" :modelValue="''" />
+            <label class="sr-only">Prénom</label>
         </div>
         <div class="form-input">
             <Input :type="'text'" :placeholder="'email'" :labelContent="''" :modelValue="''" />
+            <label class="sr-only">Email</label>
         </div>
         <div class="form-input">
             <textarea type="email" placeholder="Message"></textarea>
@@ -64,7 +67,6 @@ textarea {
         box-shadow: none;
         padding: 0;
         border-radius: 0;
-
     }
 }
 </style>
