@@ -172,12 +172,50 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
     }
 }
 
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 50px;
+}
+
+.myCard {
+    background-color: transparent;
+    width: 250px;
+    height: 387px;
+    perspective: 1000px;
+    margin-bottom: 30px;
+    margin-top: 67px;
+    margin-right: 40px;
+}
 
 .image-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.innerCard {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    -webkit-transition: -webkit-transform 0.8s;
+    transition: -webkit-transform 0.8s;
+    -o-transition: transform 0.8s;
+    transition: transform 0.8s;
+    transition: transform 0.8s, -webkit-transform 0.8s;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.myCard:hover .innerCard {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+
 
 hr {
     border: none;
@@ -204,54 +242,6 @@ hr:after {
     border: none;
     border-top: 1px solid #218e76ce;
 }
-
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-left: 50px;
-}
-
-.myCard {
-    background-color: transparent;
-    width: 250px;
-    height: 387px;
-    perspective: 1000px;
-    margin-bottom: 30px;
-    margin-top: 67px;
-    margin-right: 40px;
-}
-
-
-.title {
-    font-size: 1.5em;
-    font-weight: 900;
-    text-align: center;
-    margin: 0;
-}
-
-
-.innerCard {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    -webkit-transition: -webkit-transform 0.8s;
-    transition: -webkit-transform 0.8s;
-    -o-transition: transform 0.8s;
-    transition: transform 0.8s;
-    transition: transform 0.8s, -webkit-transform 0.8s;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    cursor: pointer;
-}
-
-
-.myCard:hover .innerCard {
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-}
-
 
 .frontSide,
 .backSide {
@@ -283,6 +273,10 @@ hr:after {
 .backSide {
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
+    font-size: 20px;
+    padding: 0 15px;
+    margin-left: -20px;
+    margin-right: -20px;
 }
 
 .frontSide::before,
@@ -301,9 +295,20 @@ hr:after {
 }
 
 
+.title {
+    font-size: 1.5em;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+}
+
 .game-image {
     max-width: 100%;
     max-height: 180px;
+}
+
+.game-name {
+    font-size: 22px;
 }
 
 .icon-cards {
@@ -342,8 +347,6 @@ hr:after {
         margin-left: 0px;
     }
 }
-
-
 
 
 @keyframes flash {
