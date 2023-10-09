@@ -68,7 +68,6 @@ const createAccount = () => {
   })
     .then((response) => {
       if (response.ok) {
-        console.log("Compte utilisateur créé avec succès");
         router.push({ name: "home" });
       }
     })
