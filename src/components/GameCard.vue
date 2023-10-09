@@ -5,21 +5,11 @@ import { useUserStore } from "@/stores/userState";
 import type { Games } from "@/types";
 import { ref, watch } from "vue";
 
-type GameDetails = Games & {
-    description?: string
-    nbJoueurs: number
-    dureePartie: number
-    categorie: string
-    imageURL: string;
-}
-
-//const game = ref<GameDetails>()
-
 const emit = defineEmits(['game-removed']);
 
 const collectionStore = useCollectionStore()
 const userStore = useUserStore();
-const userId = userStore.id;
+const currentUserId = userStore.id;
 
 const userGames = ref<Games[]>([])
 
@@ -50,20 +40,20 @@ const openDetail = (id: string) => {
     router.push(`/game/${id}`)
 }
 
-const addToCollection = async (gameId: any) => {
+const addGameToCollection = async (gameId: any) => {
     try {
         const response = await fetch(`http://localhost:5000/api/collection`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
+            body: JSON.stringify({ currentUserId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
         });
 
         if (response.ok) {
 
             const addedGame = await response.json(); // Si l'API renvoie des informations sur le jeu ajouté
-            collectionStore.addToCollection(addedGame); // Le store est mis à jour avec le jeu ajouté
+            collectionStore.addGameToCollection(addedGame); // Le store est mis à jour avec le jeu ajouté
             gameAdded.value = true;
 
         } else {
@@ -74,19 +64,19 @@ const addToCollection = async (gameId: any) => {
     }
 }
 
-const addToWishlist = async (gameId: any) => {
+const addGameToWishlist = async (gameId: any) => {
     try {
         const response = await fetch(`http://localhost:5000/api/wishlist`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
+            body: JSON.stringify({ currentUserId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
         });
 
         if (response.ok) {
             const addedGame = await response.json();
-            collectionStore.addToWishlist(addedGame);
+            collectionStore.addGameToWishlist(addedGame);
 
         } else {
             console.error('Échec de l\'ajout à la collection');
@@ -98,16 +88,13 @@ const addToWishlist = async (gameId: any) => {
 
 const removeFromCollection = async (gameId: any) => {
     try {
-        const response = await fetch(`http://localhost:5000/api/user/collection/${userId}/${gameId}`, {
+        const response = await fetch(`http://localhost:5000/api/user/collection/${currentUserId}/${gameId}`, {
             method: 'DELETE',
             credentials: 'include',
         });
 
         if (response.ok) {
-            console.log('Game removed successfully');
-
             userGames.value = userGames.value.filter(game => game._id !== gameId);
-            console.log('Updated userGames:', userGames.value);
 
             // J'emets l'événement 'game-removed' avec l'ID du jeu en tant que données
             emit('game-removed', gameId);
@@ -121,14 +108,14 @@ const removeFromCollection = async (gameId: any) => {
 
 const removeFromWishlist = async (gameId: any) => {
     try {
-        const response = await fetch(`http://localhost:5000/api/user/wishlist/${userId}/${gameId}`, {
+        const response = await fetch(`http://localhost:5000/api/user/wishlist/${currentUserId}/${gameId}`, {
             method: 'DELETE',
             credentials: 'include',
         });
 
         if (response.ok) {
             userGames.value = userGames.value.filter(game => game._id !== gameId);
-            console.log('Jeu supprimé de la wishlist');
+
         } else {
             console.error('Échec de la suppression du jeu de la wishlist');
         }
@@ -149,13 +136,11 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
     <div class="game-container">
         <div class="card-container">
             <div class="myCard" @click="openDetail(game._id)">
-                <!-- <font-awesome-icon v-if="displayTrashIcon" :icon="'trash'" class="add-icon"
-                    @click.stop="removeFromCollectionOrWishlist(game._id)" /> -->
                 <font-awesome-icon v-if="displayPlusIcon" :icon="'plus'" class="add-icon"
-                    @click.stop="addToCollection(game._id)"
+                    @click.stop="addGameToCollection(game._id)"
                     :class="{ 'flash-animation': gameAdded, 'color-change-animation': gameAdded, }" />
                 <font-awesome-icon v-if="displayHeartIcon" :icon="'heart'" class="add-icon"
-                    @click.stop="addToWishlist(game._id)" />
+                    @click.stop="addGameToWishlist(game._id)" />
 
                 <div class="innerCard">
                     <div class="frontSide">
@@ -167,7 +152,6 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
                     </div>
                     <div class="backSide">
                         <h2 class="game-name">{{ game.nom }}</h2>
-                        <!-- <img src="images/sablier.png" class="icon-cards" alt="sablier"> -->
                         <h4>Durée d'une partie : {{ game.dureePartie }} minutes</h4>
                         <h4>Nombre de joueurs : {{ game.nbJoueurs }}</h4>
                         <h4>Catégorie : {{ game.categorie }}</h4>
