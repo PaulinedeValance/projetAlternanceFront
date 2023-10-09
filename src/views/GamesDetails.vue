@@ -82,7 +82,6 @@ p {
 @media screen and (max-width: 768px) {
     .page-container {
         margin-left: 0;
-        /* padding-right: 20px; */
     }
 
     .game-image {
