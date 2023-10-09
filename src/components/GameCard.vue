@@ -9,7 +9,7 @@ const emit = defineEmits(['game-removed']);
 
 const collectionStore = useCollectionStore()
 const userStore = useUserStore();
-const currentUserId = userStore.id;
+const userId = userStore.id;
 
 const userGames = ref<Games[]>([])
 
@@ -40,20 +40,20 @@ const openDetail = (id: string) => {
     router.push(`/game/${id}`)
 }
 
-const addGameToCollection = async (gameId: any) => {
+const addToCollection = async (gameId: any) => {
     try {
         const response = await fetch(`http://localhost:5000/api/collection`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ currentUserId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
+            body: JSON.stringify({ userId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
         });
 
         if (response.ok) {
 
             const addedGame = await response.json(); // Si l'API renvoie des informations sur le jeu ajouté
-            collectionStore.addGameToCollection(addedGame); // Le store est mis à jour avec le jeu ajouté
+            collectionStore.addToCollection(addedGame); // Le store est mis à jour avec le jeu ajouté
             gameAdded.value = true;
 
         } else {
@@ -64,19 +64,19 @@ const addGameToCollection = async (gameId: any) => {
     }
 }
 
-const addGameToWishlist = async (gameId: any) => {
+const addToWishlist = async (gameId: any) => {
     try {
         const response = await fetch(`http://localhost:5000/api/wishlist`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ currentUserId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
+            body: JSON.stringify({ userId, gameId }), // Envoie de l'ID du jeu et l'ID du user dans le body de ma requête
         });
 
         if (response.ok) {
             const addedGame = await response.json();
-            collectionStore.addGameToWishlist(addedGame);
+            collectionStore.addToWishlist(addedGame);
 
         } else {
             console.error('Échec de l\'ajout à la collection');
@@ -88,7 +88,7 @@ const addGameToWishlist = async (gameId: any) => {
 
 const removeFromCollection = async (gameId: any) => {
     try {
-        const response = await fetch(`http://localhost:5000/api/user/collection/${currentUserId}/${gameId}`, {
+        const response = await fetch(`http://localhost:5000/api/user/collection/${userId}/${gameId}`, {
             method: 'DELETE',
             credentials: 'include',
         });
@@ -108,7 +108,7 @@ const removeFromCollection = async (gameId: any) => {
 
 const removeFromWishlist = async (gameId: any) => {
     try {
-        const response = await fetch(`http://localhost:5000/api/user/wishlist/${currentUserId}/${gameId}`, {
+        const response = await fetch(`http://localhost:5000/api/user/wishlist/${userId}/${gameId}`, {
             method: 'DELETE',
             credentials: 'include',
         });
@@ -137,10 +137,10 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
         <div class="card-container">
             <div class="myCard" @click="openDetail(game._id)">
                 <font-awesome-icon v-if="displayPlusIcon" :icon="'plus'" class="add-icon"
-                    @click.stop="addGameToCollection(game._id)"
+                    @click.stop="addToCollection(game._id)"
                     :class="{ 'flash-animation': gameAdded, 'color-change-animation': gameAdded, }" />
                 <font-awesome-icon v-if="displayHeartIcon" :icon="'heart'" class="add-icon"
-                    @click.stop="addGameToWishlist(game._id)" />
+                    @click.stop="addToWishlist(game._id)" />
 
                 <div class="innerCard">
                     <div class="frontSide">
@@ -163,8 +163,6 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
         </div>
     </div>
 </template>
-
-  
 
 <style>
 /* Permet de résoudre le problème sous Firefox avec le hover des cards  */
@@ -318,6 +316,8 @@ hr:after {
     transition: transform 0.3s ease-in-out;
     color: #218e76ce;
     margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 18px;
 
 }
 

@@ -28,7 +28,6 @@ const fetchGames = async () => {
 
 onMounted(async () => {
   await fetchGames();
-  console.log("jeux :", filteredGames)
 
 })
 
@@ -126,7 +125,7 @@ const handleSearch = (searchQuery: string) => {
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Cabin+Sketch:wght@700&family=Didact+Gothic&family=Handlee&family=Londrina+Shadow&family=Pacifico&family=Patrick+Hand+SC&family=Rampart+One&family=Sue+Ellen+Francisco&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Cabin+Sketch:wght@700&family=Gabarito:wght@400;500;600&family=Handlee&family=Pacifico&family=Patrick+Hand+SC&family=Sue+Ellen+Francisco&display=swap');
 
 .search {
   display: flex;
@@ -136,9 +135,10 @@ const handleSearch = (searchQuery: string) => {
 }
 
 .welcome-title {
-  font-family: 'Patrick Hand SC', cursive;
+  font-family: 'Gabarito', cursive;
   margin: 20px 10px 0 auto;
   font-size: 32px;
+  color: #218e76ce;
 }
 
 .dashboard-container {
@@ -160,7 +160,7 @@ const handleSearch = (searchQuery: string) => {
 .game-cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  margin-left: 50px;
+  margin-left: 60px;
 }
 
 
@@ -221,7 +221,7 @@ const handleSearch = (searchQuery: string) => {
   font-size: 19px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 852px) {
   .logout-button-responsive {
     display: none;
   }

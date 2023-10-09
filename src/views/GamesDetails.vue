@@ -16,9 +16,7 @@ const game = ref<GameDetails>()
 onMounted(async () => {
     const reqDetails = await fetch(`http://localhost:5000/api/games/${router.currentRoute.value.params.id}`)
     game.value = await reqDetails.json()
-    console.log(game.value);
 })
-
 
 </script>
 <template>
@@ -70,10 +68,17 @@ onMounted(async () => {
 }
 
 
+@media screen and (max-width: 1024px) {
+    .page-container {
+        margin-left: 0;
+    }
+}
+
+
 @media screen and (max-width: 768px) {
     .page-container {
         margin-left: 0;
-        padding-right: 20px;
+        /* padding-right: 20px; */
     }
 
     .game-image {
@@ -87,5 +92,23 @@ onMounted(async () => {
         margin-right: 0;
 
     }
+
+    .game-image-detail {
+        margin: 0 auto;
+        width: 50%;
+        height: auto;
+        margin-top: 10px;
+    }
+
+    h4 {
+        text-align: center;
+    }
+
+    p {
+        text-align: justify;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
 }
 </style>

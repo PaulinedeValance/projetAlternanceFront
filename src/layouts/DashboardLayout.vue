@@ -7,8 +7,6 @@ const showMenu = ref(false);
 const sidebarOpen = ref(false)
 
 const toggleMenu = () => {
-  console.log("Toggle Menu Called");
-
   showMenu.value = !showMenu.value;
 };
 

@@ -13,7 +13,6 @@ const userGames = ref<Games[]>([])
 
 const fetchUserGames = async () => {
   try {
-    console.log('userId:', userId)
     const response = await fetch(`http://localhost:5000/api/user/collection/${userId}`, {
       method: 'GET',
       credentials: 'include',
@@ -59,7 +58,7 @@ const exportCollectionPDF = () => {
     <div class="dashboard-container">
       <div class="page-container">
         <router-link to="/dashboard">
-          <p class="dashboard-link">Retour Dashboard</p>
+          <p class="dashboard-link">Dashboard</p>
         </router-link>
         <div class="title-button-container">
           <h2 class="collection-title">Ma collection</h2>
@@ -123,6 +122,12 @@ const exportCollectionPDF = () => {
   font-style: italic;
   font-size: 17px;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .game-cards-container {
+    margin-left: 0;
+  }
 }
 </style>
 

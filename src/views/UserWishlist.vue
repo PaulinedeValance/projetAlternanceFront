@@ -13,7 +13,6 @@ const userGames = ref<Games[]>([])
 
 const fetchUserGames = async () => {
   try {
-    console.log('userId:', userId)
     const response = await fetch(`http://localhost:5000/api/user/wishlist/${userId}`, {
       method: 'GET',
       credentials: 'include',
@@ -61,7 +60,7 @@ const exportWishlistPDF = () => {
     <div class="dashboard-container">
       <div class="page-container">
         <router-link to="/dashboard">
-          <p class="dashboard-link">Retour Dashboard</p>
+          <p class="dashboard-link">Dashboard</p>
         </router-link>
         <div class="title-button-container">
           <h2 class="wishlist-title">Ma wishlist</h2>
@@ -121,5 +120,11 @@ const exportWishlistPDF = () => {
   font-style: italic;
   font-size: 17px;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .game-cards-container {
+    margin-left: 0;
+  }
 }
 </style>
