@@ -12,6 +12,7 @@ const performSearch = () => {
 
 <template>
   <div>
+    <label class="sr-only" for="searchInput">Rechercher un jeu</label>
     <input class="search-bar" v-model="searchQuery" @input="performSearch" placeholder="Rechercher un jeu..." />
   </div>
 </template>
