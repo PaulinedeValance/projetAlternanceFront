@@ -35,8 +35,4 @@ defineProps<{
   color: #26517d;
   border: solid 2px #26517d;
 }
-
-/* .custom-button {
-    color: rgb(210, 210, 229);
-} */
 </style>

@@ -1,15 +1,9 @@
 <script setup lang="ts">
-import { useUserStore } from "@/stores/userState";
-import { computed, ref } from "vue";
-const store = useUserStore();
-
 </script>
 
 <template>
   <nav>
-    <!-- <p>{{ store.gameList }}</p> -->
     <ul class="navbar-display">
-      <li class="navbar-link"><router-link to="/">Home</router-link></li>
       <li class="navbar-link">
         <router-link to="/jeux">Les jeux</router-link>
       </li>
@@ -25,6 +19,7 @@ const store = useUserStore();
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Cabin+Sketch:wght@700&family=Didact+Gothic&family=Handlee&family=Londrina+Shadow&family=Pacifico&family=Patrick+Hand+SC&family=Rampart+One&family=Sue+Ellen+Francisco&display=swap');
+
 .navbar-display {
   display: flex;
   justify-content: space-around;
