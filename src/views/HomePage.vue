@@ -2,6 +2,7 @@
 import Footer from '@/components/Footer.vue';
 import Slider from "@/components/Slider.vue";
 import Button from "../components/Button.vue";
+import Navbar from "../components/NavBar.vue"
 import Input from "../components/Input.vue";
 import Modal from "../components/Modal.vue";
 import Login from "../components/Login.vue"
@@ -56,17 +57,20 @@ const login = async () => {
 </script>
 
 <template>
-  <h1>Page d'accueil</h1>
-  <img src="images/blob-pink.svg" alt="Description de l'image" />
-  <div>
+  <Navbar />
+
+
+  <div class="homepage-bloc">
+    <h1>Bienvenue sur La Ruche Ludique</h1>
     <p class="text-homepage">
       L' Application Web pour vos jeux de société Simple, intuitive,
       performante, multi-support, collaborative et GRATUITE ! Connectez-vous ou
       créez un compte pour commencer.
     </p>
+    <Button :name="'Se connecter à la ludothèque'" @click="openModal"></Button>
   </div>
 
-  <Button :name="'Se connecter à la ludothèque'" @click="openModal"></Button>
+  <img src="images/test.svg" alt="Shape" />
 
   <Modal v-model="showModal">
 
@@ -78,7 +82,7 @@ const login = async () => {
       <h2>Connexion</h2>
       <form @submit.prevent="login" class="login-form">
         <div class="form-group">
-          <Input :type="'email'" placeholder="Email" v-model="email" :label-content="'Email'" />
+          <Input :type="'text'" placeholder="Email" v-model="email" :label-content="'Email/Pseudo'" />
         </div>
 
         <div class="form-group">
@@ -95,6 +99,10 @@ const login = async () => {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Cabin+Sketch:wght@700&family=Handlee&family=Pacifico&family=Patrick+Hand+SC&family=Sue+Ellen+Francisco&display=swap');
+
+.homepage-bloc {
+  margin-left: 30px;
+}
 
 .modal-container {
   display: flex;
