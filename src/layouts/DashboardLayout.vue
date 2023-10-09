@@ -39,7 +39,7 @@ const toggleMenu = () => {
         </ul>
         <router-link to="/dashboard">
           <div class="logo-container">
-            <img src="images/logo.png" alt="Logo" class="logo-img" />
+            <img src="/images/logo.png" alt="Logo" class="logo-img" />
           </div>
         </router-link>
       </div>
