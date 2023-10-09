@@ -67,6 +67,10 @@ onMounted(async () => {
     margin-left: 30px;
 }
 
+h4,
+p {
+    font-size: 19px;
+}
 
 @media screen and (max-width: 1024px) {
     .page-container {
