@@ -31,7 +31,6 @@ onMounted(async () => {
 
 })
 
-
 const userStore = useUserStore(); // Instance du store
 
 // Je récupère les autres informations de l'utilisateur à partir du local storage
@@ -60,23 +59,26 @@ const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
 };
 
-const logout = () => {
-  // Appel à l'API de déconnexion
-  fetch('"http://localhost:5000/api/logout"', {
-    method: 'GET',
-  })
-    .then(response => {
-      if (response.ok) {
-        // Déconnexion réussie, j'utilise router.push pour la redirection
-        router.push('/'); // Redirection vers la page d'accueil
-      } else {
-        // En cas d'erreur
-        console.error('Échec de la déconnexion');
-      }
-    })
-    .catch(error => {
-      console.error('Erreur lors de la déconnexion', error);
+const logout = async () => {
+  try {
+    const response = await fetch("http://localhost:5000/api/logout", {
+      method: 'GET',
     });
+
+    if (response.ok) {
+      // Je supprime les données du localStorage
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userName');
+
+      // Redirection du user vers la page d'accueil
+      router.push('/');
+    } else {
+      console.error('Échec de la déconnexion');
+    }
+  } catch (error) {
+    console.error('Erreur lors de la déconnexion', error);
+  }
 };
 
 const handleSearch = (searchQuery: string) => {
