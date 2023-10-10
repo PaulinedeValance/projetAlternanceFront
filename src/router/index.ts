@@ -39,33 +39,38 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/Dashboard.vue'),
-      meta: { layout: DashboardLayout }, // J'utilise le layout spécifique pour le Dashboard
+      meta: { layout: DashboardLayout, requiresAuth: true }, // J'utilise le layout spécifique pour le Dashboard
     },
     {
       path: '/usercollection',
       name: 'userCollection',
       component: () => import('../views/UserCollection.vue'),
-      meta: { layout: DashboardLayout },
+      meta: { layout: DashboardLayout, requiresAuth: true },
     },
     {
       path: '/userwishlist',
       name: 'userWishlist',
       component: () => import('../views/UserWishlist.vue'),
-      meta: { layout: DashboardLayout },
+      meta: { layout: DashboardLayout, requiresAuth: true },
     },
     {
       path: '/game/:id',
       name: 'gameDetails',
       component: () => import('../views/GamesDetails.vue'),
-      meta: { layout: DashboardLayout },
-    },
-    {
-      path: '/gamesgenerator',
-      name: 'gamesGenerator',
-      component: () => import('../views/GamesGenerator.vue'),
-      meta: { layout: DashboardLayout },
+      meta: { layout: DashboardLayout, requiresAuth: true },
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  const isUserAuthenticated = localStorage.getItem('userId') !== null;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  if (requiresAuth && !isUserAuthenticated) {
+    next('/'); // Je redirige vers la page d'accueil si l'authentification est requise mais le user n'est pas authentifié
+  } else {
+    next(); // Sinon, je continue la navigation
+  }
 });
 
 export default router;
