@@ -194,6 +194,9 @@ const handleSearch = (searchQuery: string) => {
   .welcome-title {
     font-size: 19px;
     margin: 0;
+    /* padding-left: 20px;
+    padding-right: 20px; */
+    padding: 20px;
   }
 }
 

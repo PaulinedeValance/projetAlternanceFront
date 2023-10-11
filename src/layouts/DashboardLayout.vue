@@ -26,22 +26,27 @@ const toggleMenu = () => {
               class="icon-camera" />Ma collection</router-link></li>
         <li class="navbar-link"><router-link to="/userwishlist"><font-awesome-icon :icon="'list'"
               class="icon-camera" />Wish list</router-link></li>
-        <li><a href="gamesgenerator"><font-awesome-icon :icon="'rotate-right'" class="icon-camera" />Générateur</a></li>
+        <!-- <li><a href="gamesgenerator"><font-awesome-icon :icon="'rotate-right'" class="icon-camera" />Générateur</a></li> -->
       </ul>
 
       <div class="sidebar">
+        <router-link to="/dashboard">
+          <div class="logo-container">
+            <img src="/images/logo-white.png" alt="Logo" class="logo-img" />
+          </div>
+        </router-link>
         <ul>
           <li class="navbar-link"><router-link to="/usercollection"><font-awesome-icon :icon="'puzzle-piece'"
                 class="icon-camera" />Ma collection</router-link></li>
           <li class="navbar-link"><router-link to="/userwishlist"><font-awesome-icon :icon="'list'"
                 class="icon-camera" />Wish list</router-link></li>
-          <li><a href="gamesgenerator"><font-awesome-icon :icon="'rotate-right'" class="icon-camera" />Générateur</a></li>
+          <!-- <li><a href="gamesgenerator"><font-awesome-icon :icon="'rotate-right'" class="icon-camera" />Générateur</a></li> -->
         </ul>
-        <router-link to="/dashboard">
+        <!-- <router-link to="/dashboard">
           <div class="logo-container">
-            <img src="/images/logo.png" alt="Logo" class="logo-img" />
+            <img src="/images/logo-gris.png" alt="Logo" class="logo-img" />
           </div>
-        </router-link>
+        </router-link> -->
       </div>
       <div class="page-container">
         <slot></slot>
@@ -59,7 +64,7 @@ const toggleMenu = () => {
 }
 
 .logo-img {
-  width: 250px;
+  width: 230px;
   height: auto;
 }
 
@@ -120,7 +125,7 @@ a {
 }
 
 .sidebar ul {
-  padding: 40px;
+  padding: 15px 40px 40px 40px;
   flex-grow: 1;
 }
 
