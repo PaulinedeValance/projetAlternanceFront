@@ -9,16 +9,9 @@ defineProps<{
 
 <template>
   <div>
-    <label for="firstname">{{ labelContent }}</label>
-    <input
-      class="input-contact"
-      :type="type"
-      :placeholder="placeholder"
-      :value="modelValue"
-      @input="
-        $emit('update:modelValue', ($event.target as HTMLInputElement).value)
-      "
-    />
+    <label for="">{{ labelContent }}</label>
+    <input class="input-contact" :type="type" :placeholder="placeholder" :value="modelValue" @input="
+      $emit('update:modelValue', ($event.target as HTMLInputElement).value)" />
   </div>
 </template>
 <style scoped>
