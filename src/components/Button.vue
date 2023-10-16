@@ -25,6 +25,7 @@ defineProps<{
   cursor: pointer;
   margin-top: 20px;
   margin-bottom: 20px;
+  margin-left: 40px;
 }
 
 .custom-button:hover {
