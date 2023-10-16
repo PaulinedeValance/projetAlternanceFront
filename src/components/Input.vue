@@ -18,5 +18,7 @@ defineProps<{
 .input-contact {
   padding: 7px;
   margin-left: 10px;
+  border: solid 1px #2B4573;
+  color: #2B4573;
 }
 </style>
