@@ -43,6 +43,7 @@
 .logo-navbar {
   width: 40%;
   margin-right: 40px;
+  margin-bottom: 10px;
 }
 
 a {
