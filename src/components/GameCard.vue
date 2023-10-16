@@ -309,6 +309,7 @@ hr:after {
 
 .game-name {
     font-size: 22px;
+    text-decoration: none;
 }
 
 .icon-cards {
