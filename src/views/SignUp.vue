@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import SignUpForm from "../components/SignUpForm.vue";
+import NavBarOtherPages from "../components/NavBarOtherPages.vue"
 import Footer from "@/components/Footer.vue";
 
 </script>
 
 <template>
-  <!-- <h1>Inscrivez-vous</h1> -->
+  <NavBarOtherPages />
   <SignUpForm />
   <Footer />
 </template>

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import Footer from "@/components/Footer.vue";
+import NavBarOtherPages from "../components/NavBarOtherPages.vue"
 </script>
 
 <template>
+    <NavBarOtherPages />
     <div class="legales-notes">
         <h2 class="legal-title">Mentions légales</h2>
         <div class="paragraph-style">

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import Footer from "@/components/Footer.vue";
+import NavBarOtherPages from "../components/NavBarOtherPages.vue"
 
 </script>
 
 <template>
+    <NavBarOtherPages />
     <div class="faq">
         <h2 class="faq-title">Foire aux Questions</h2>
         <div class="paragraph-style">
