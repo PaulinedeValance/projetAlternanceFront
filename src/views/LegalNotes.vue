@@ -26,9 +26,8 @@ import NavBarOtherPages from "../components/NavBarOtherPages.vue"
 
         <div class="paragraph-style">
             <h3>Hébergement :</h3>
-            <p>Le site est hébergé par [nom de l'hébergeur]</p>
-            <p>Adresse de l'hébergeur : [adresse de l'hébergeur]</p>
-            <p>Téléphone de l'hébergeur : [numéro de téléphone de l'hébergeur]</p>
+            <p>Le site est hébergé par OVH</p>
+            <p>Adresse de l'hébergeur : : 2 rue Kellermann – BP 80157 59053 ROUBAIX CEDEX 1 </p>
         </div>
 
         <div class="paragraph-style">
@@ -77,6 +76,21 @@ h3 {
 
 .paragraph-style:last-of-type {
     padding-bottom: 70px;
+}
+
+
+@media (max-width: 768px) {
+    .question {
+        font-size: 20px;
+        color: crimson;
+    }
+
+    .paragraph-style {
+        margin-left: 0px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
 }
 </style>
   

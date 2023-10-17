@@ -7,6 +7,7 @@ import NavBarOtherPages from "../components/NavBarOtherPages.vue"
 <template>
     <NavBarOtherPages />
     <div class="faq">
+
         <h2 class="faq-title">Foire aux Questions</h2>
         <div class="paragraph-style">
             <h3 class="question">Quel est le but de la Ruche Ludique ?</h3>
@@ -50,17 +51,12 @@ import NavBarOtherPages from "../components/NavBarOtherPages.vue"
     margin: 0 auto;
     padding: 10px 160px;
     padding-bottom: 30px;
-
-    @media (max-width: 768px) {
-        padding-left: 25px;
-        padding-right: 40px;
-        text-align: center;
-    }
 }
 
 .faq-title {
     margin-bottom: 25px;
     text-align: center;
+    color: #2B4573;
 }
 
 .paragraph-style {
@@ -76,6 +72,16 @@ import NavBarOtherPages from "../components/NavBarOtherPages.vue"
     .question {
         font-size: 20px;
         color: crimson;
+    }
+
+    .paragraph-style {
+        margin-left: 0px;
+    }
+
+    .faq {
+        padding-left: 40px;
+        padding-right: 40px;
+        text-align: justify;
     }
 
 }
