@@ -123,7 +123,7 @@ form {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 18vh auto 0;
+  margin: 4vh auto 0;
   border-radius: 10px;
   box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
 }
@@ -159,6 +159,7 @@ form {
     box-shadow: none;
     padding: 0;
     border-radius: 0;
+    margin-top: 50px;
 
   }
 }
