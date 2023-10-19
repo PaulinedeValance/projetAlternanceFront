@@ -36,4 +36,21 @@ defineProps<{
   color: #26517d;
   border: solid 2px #26517d;
 }
+
+@media (max-width: 768px) {
+  .custom-button {
+    margin-left: 0;
+  }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  .custom-button {
+    font-size: 25px;
+    margin-left: 0;
+    padding: 15px 25px;
+  }
+
+
+}
 </style>
