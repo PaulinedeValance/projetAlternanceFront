@@ -39,6 +39,11 @@
     padding: 0;
     font-family: 'Bellota Text', cursive;
     padding-right: 25px;
+    display: flex;
+}
+
+.nav-link li a:hover {
+    color: #218C75;
 }
 
 .navbar-link {
@@ -53,10 +58,6 @@ a {
     text-decoration: none;
     color: #2B4573;
     font-size: 22px;
-}
-
-.nav-link {
-    display: flex;
 }
 
 .home-icon {
