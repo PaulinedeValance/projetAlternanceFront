@@ -34,10 +34,15 @@
   font-family: 'Bellota Text', cursive;
   padding-top: 20px;
   padding-right: 25px;
+  display: flex;
 }
 
 .navbar-link {
   margin-right: 40px;
+}
+
+.nav-link li a:hover {
+  color: #218C75;
 }
 
 .logo-navbar {
@@ -52,9 +57,7 @@ a {
   font-size: 22px;
 }
 
-.nav-link {
-  display: flex;
-}
+
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   a {
