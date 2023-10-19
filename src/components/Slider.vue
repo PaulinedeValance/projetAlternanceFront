@@ -12,8 +12,8 @@ const slides = [
 
 <template>
   <div class="carousel-container">
-    <Carousel :wrap-around="true" style="width: 500px;">
-      <Slide v-for="slide in slides" :key="slide.id">
+    <Carousel :wrap-around="true" :autoplay="4000" style="width: 500px;" class="custom-carousel">
+      <Slide v-for=" slide  in  slides " :key="slide.id">
         <div class="carousel__item">
           <h3 class="carousel-title">{{ slide.title }}</h3>
           <img :src="slide.img" alt="Carousel Image" />
@@ -55,5 +55,11 @@ const slides = [
 .carousel__prev,
 .carousel__next {
   box-sizing: content-box;
+}
+
+@media (max-width: 1329px) {
+  .carousel-container {
+    display: none;
+  }
 }
 </style>
