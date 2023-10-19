@@ -55,4 +55,34 @@ a {
 .nav-link {
   display: flex;
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  a {
+    font-size: 35px;
+  }
+}
+
+@media (max-width: 1329px) {
+  .navbar-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-link {
+    padding-top: 10px;
+    padding-right: 0px;
+    text-align: center;
+    display: block;
+
+  }
+
+  .navbar-link {
+    margin: 5px 0;
+  }
+
+  .logo-navbar {
+    display: none;
+  }
+
+}
 </style>
