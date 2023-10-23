@@ -2,7 +2,7 @@
 import Footer from '@/components/Footer.vue';
 import Slider from "@/components/Slider.vue";
 import Button from "../components/Button.vue";
-import Navbar from "../components/NavBar.vue"
+import NavBarHomepage from "../components/NavBarHomepage.vue"
 import Input from "../components/Input.vue";
 import Modal from "../components/Modal.vue";
 import Login from "../components/Login.vue"
@@ -57,21 +57,28 @@ const login = async () => {
 </script>
 
 <template>
-  <Navbar />
+  <div class="homepage-container">
+    <div class="homepage-content">
+      <div class="color-block">
+        <div class="homepage-bloc">
 
-
-  <div class="homepage-bloc">
-    <h1>Bienvenue sur La Ruche Ludique</h1>
-    <p class="text-homepage">
-      L' Application Web pour vos jeux de société Simple, intuitive,
-      performante, multi-support, collaborative et GRATUITE ! Connectez-vous ou
-      créez un compte pour commencer.
-    </p>
-    <Button :name="'Se connecter à la ludothèque'" @click="openModal"></Button>
+          <h1>Bienvenue sur La Ruche Ludique</h1>
+          <p class="text-homepage">
+            L' Application Web pour vos jeux de société Simple, intuitive,
+            performante, multi-support, collaborative et GRATUITE ! Connectez-vous ou
+            créez un compte pour commencer.
+          </p>
+          <Button :name="'Se connecter à la ludothèque'" @click="openModal"></Button>
+        </div>
+        <div class="mobile-content">
+          <p>... Et pleins d'autres jeux à ajouter</p>
+          <img src="/images/ark-nova.jpg" alt="Image 1" />
+        </div>
+      </div>
+    </div>
+    <NavBarHomepage />
   </div>
-
-  <img src="images/test.svg" alt="Shape" />
-
+  <img src="/images/shape2.png" class="shape1-background" alt="forme verte" />
   <Modal v-model="showModal">
 
     <Login @close="showModal = false" />
@@ -79,7 +86,7 @@ const login = async () => {
     <div class="modal-content">
       <button @click="closeModal" class="close-button-modale">X</button>
       <!-- <Button :name="'X'" @click="closeModal" class="custom-button"></Button> -->
-      <h2>Connexion</h2>
+      <h2 class="connexion-title">Connexion</h2>
       <form @submit.prevent="login" class="login-form">
         <div class="form-group">
           <Input :type="'text'" placeholder="Email" v-model="email" :label-content="'Email/Pseudo'" />
@@ -100,8 +107,54 @@ const login = async () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Cabin+Sketch:wght@700&family=Handlee&family=Pacifico&family=Patrick+Hand+SC&family=Sue+Ellen+Francisco&display=swap');
 
+
+.homepage-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+
+.homepage-container {
+  position: relative;
+  background-image: url('/images/blob-bg.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 .homepage-bloc {
-  margin-left: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.shape1-background {
+  position: absolute;
+  top: -156px;
+  left: -100px;
+  z-index: 0;
+  object-fit: cover;
+  object-position: top;
+  width: 40%;
+}
+
+.navbar {
+  margin-left: 0;
+}
+
+
+.homepage-bloc {
+  margin-left: 20px;
+}
+
+h1 {
+  /* color: #03224c; */
+  color: whitesmoke;
+}
+
+.connexion-title {
+  color: #2B4573;
 }
 
 .modal-container {
@@ -135,7 +188,12 @@ const login = async () => {
   box-shadow: 0 5px 30px 0 rgba(167, 97, 97, 0.1);
   animation: fadeIn 1s ease both;
   font-family: 'Bellota Text', cursive;
+  color: #2B4573;
 
+}
+
+input {
+  border: solid 1px #2B4573;
 }
 
 .login-form {
@@ -148,7 +206,6 @@ const login = async () => {
 
 .form-group {
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
 }
 
@@ -170,14 +227,110 @@ a {
 
 .text-homepage {
   width: 500px;
+  font-size: 18px;
+  color: whitesmoke;
 }
 
-/* .close-button-modale:focus {
-	outline: solid 0 transparent;
-	box-shadow: 0 0 0 2px #a9afb3
+.mobile-content {
+  display: none;
 }
 
-.close-button-modale:hover {
-  background: rgba(29, 161, 142, .1)
-} */
+
+@media (max-width: 1329px) {
+
+  h1 {
+    color: #113a74;
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+
+  .homepage-container {
+    display: flex;
+    flex-direction: column-reverse;
+    background: none;
+  }
+
+  .color-block {
+    background-color: #FBAE3C;
+    height: 280px;
+    width: 100%;
+    margin-top: 40px;
+  }
+
+
+
+  .homepage-bloc {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: 0px;
+    padding-top: 1px;
+  }
+
+  .text-homepage {
+    width: auto;
+    font-size: 18px;
+    color: #113a74;
+
+  }
+
+  .shape1-background {
+    display: none;
+  }
+
+  .nav-link {
+    display: none;
+  }
+
+  .text-container {
+    margin-top: 20px;
+  }
+
+  .text-homepage {
+    font-size: 17px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .mobile-content {
+    display: block;
+    text-align: center;
+
+  }
+
+  .mobile-content img {
+    max-width: 100%;
+    margin-bottom: 100px;
+    margin-top: 20px;
+  }
+
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  .text-homepage {
+    font-size: 25px;
+
+  }
+
+  .mobile-content {
+    font-size: 27px;
+  }
+
+  .modal-content {
+    width: 320px;
+    height: 370px;
+    font-size: 27px;
+  }
+
+  .connexion-title {
+    font-size: 33px;
+    text-align: center;
+  }
+
+  .form-group {
+    text-align: center;
+  }
+
+}
 </style>

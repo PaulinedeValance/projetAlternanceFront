@@ -51,6 +51,7 @@ import NavBarOtherPages from "../components/NavBarOtherPages.vue"
     margin: 0 auto;
     padding: 10px 160px;
     padding-bottom: 30px;
+    color: #2B4573;
 }
 
 .faq-title {

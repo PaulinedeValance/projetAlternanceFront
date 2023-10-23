@@ -18,7 +18,8 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #26517d;
+    /* background-color: #26517d; */
+    background-color: #2b4573;
     color: white;
     display: flex;
     align-items: center;
