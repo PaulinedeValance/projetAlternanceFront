@@ -35,13 +35,13 @@ const slides = [
   justify-content: center;
 }
 
-
 .carousel__item {
   min-height: 200px;
   width: 100%;
   font-size: 20px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
 }
 
 .carousel__slide {

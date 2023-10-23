@@ -112,6 +112,5 @@ p {
         margin-left: 30px;
         margin-right: 30px;
     }
-
 }
 </style>

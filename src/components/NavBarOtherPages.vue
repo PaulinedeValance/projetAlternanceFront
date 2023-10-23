@@ -90,7 +90,6 @@ a {
 
     .navbar-link {
         margin: 0 10px;
-
     }
 
     .home-icon {

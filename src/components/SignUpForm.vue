@@ -128,7 +128,6 @@ form {
   box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
 }
 
-
 .form-input {
   margin-bottom: 20px;
 }

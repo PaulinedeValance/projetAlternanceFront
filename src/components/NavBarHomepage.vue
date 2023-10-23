@@ -25,7 +25,6 @@
   flex-direction: column;
   align-items: flex-end;
   margin-top: 10px;
-
 }
 
 .nav-link {
@@ -46,7 +45,7 @@
 }
 
 .logo-navbar {
-  width: 40%;
+  width: 33%;
   margin-right: 40px;
   margin-bottom: 10px;
 }
@@ -56,7 +55,6 @@ a {
   color: #2B4573;
   font-size: 22px;
 }
-
 
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -76,7 +74,6 @@ a {
     padding-right: 0px;
     text-align: center;
     display: block;
-
   }
 
   .navbar-link {

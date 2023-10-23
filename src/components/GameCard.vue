@@ -52,7 +52,7 @@ const addToCollection = async (gameId: any) => {
 
         if (response.ok) {
 
-            const addedGame = await response.json(); // Si l'API renvoie des informations sur le jeu ajouté
+            const addedGame = await response.json(); // Si la réponse est ok, l'API renvoie des informations sur le jeu ajouté
             collectionStore.addToCollection(addedGame); // Le store est mis à jour avec le jeu ajouté
             gameAdded.value = true;
 
@@ -165,7 +165,7 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
 </template>
 
 <style>
-/* Permet de résoudre le problème sous Firefox avec le hover des cards  */
+/* Permet de résoudre le problème sous Firefox du hover des cards  */
 @-moz-document url-prefix() {
     .innerCard {
         backface-visibility: hidden;
@@ -214,8 +214,6 @@ const removeFromCollectionOrWishlist = (gameId: any) => {
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
-
-
 
 hr {
     border: none;
@@ -269,7 +267,6 @@ hr:after {
     font-weight: 700;
 }
 
-
 .backSide {
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
@@ -293,7 +290,6 @@ hr:after {
     z-index: -1;
     border-radius: 1em;
 }
-
 
 .title {
     font-size: 1.5em;

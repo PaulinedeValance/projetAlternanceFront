@@ -51,8 +51,6 @@ form {
 
 .form-input {
     margin-bottom: 20px;
-
-
 }
 
 textarea {

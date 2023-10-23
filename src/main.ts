@@ -20,7 +20,7 @@ import router from './router';
 
 import './assets/main.css';
 
-// Ajout des icônes que j'aimerais utiliser à la bibliothèque Font Awesome
+// Ajout des icônes que j'aimerais utiliser de la bibliothèque Font Awesome
 library.add(faEye, faEyeSlash, faCameraRetro, faPuzzlePiece, faList, faRotateRight, faPlus, faHeart, faTrash);
 
 const app = createApp(App);

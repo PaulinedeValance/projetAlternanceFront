@@ -1,13 +1,13 @@
 <script setup lang="ts">
-
 </script>
+
 <template>
     <footer class="footer">
         <div class="footer-left">
             <p>&copy; 2023 - La Ruche Ludique</p>
         </div>
         <div class="footer-right">
-            <router-link to="/faq">FAQ</router-link>
+            <router-link class="faq-link" to="/faq">FAQ</router-link>
             <router-link class="mentions-legales-link" to="/legalnotes">Mentions légales</router-link>
         </div>
     </footer>
@@ -18,7 +18,6 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    /* background-color: #26517d; */
     background-color: #2b4573;
     color: white;
     display: flex;
@@ -47,6 +46,15 @@
 @media (max-width: 768px) {
     footer {
         font-size: 16px;
+    }
+
+    .footer-right {
+        margin-right: 32px;
+    }
+
+    .faq-link, .mentions-legales-link {
+        font-size: 14px;
+       
     }
 }
 </style>
