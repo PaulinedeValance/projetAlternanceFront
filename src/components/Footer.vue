@@ -8,7 +8,6 @@
         </div>
         <div class="footer-right">
             <router-link class="faq-link" to="/faq">FAQ</router-link>
-            <router-link class="faq-link" to="/faq">FAQ</router-link>
             <router-link class="mentions-legales-link" to="/legalnotes">Mentions légales</router-link>
         </div>
     </footer>
