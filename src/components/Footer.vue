@@ -1,12 +1,13 @@
 <script setup lang="ts">
-
 </script>
+
 <template>
     <footer class="footer">
         <div class="footer-left">
             <p>&copy; 2023 - La Ruche Ludique</p>
         </div>
         <div class="footer-right">
+            <router-link class="faq-link" to="/faq">FAQ</router-link>
             <router-link class="faq-link" to="/faq">FAQ</router-link>
             <router-link class="mentions-legales-link" to="/legalnotes">Mentions légales</router-link>
         </div>

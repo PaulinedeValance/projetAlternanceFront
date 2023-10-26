@@ -106,12 +106,10 @@ const login = async () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Cabin+Sketch:wght@700&family=Handlee&family=Pacifico&family=Patrick+Hand+SC&family=Sue+Ellen+Francisco&display=swap');
 
-
 .homepage-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
 
 .homepage-container {
@@ -147,6 +145,7 @@ const login = async () => {
 
 h1 {
   color: whitesmoke;
+  font-size: 28px;
 }
 
 .connexion-title {
@@ -185,7 +184,6 @@ h1 {
   animation: fadeIn 1s ease both;
   font-family: 'Bellota Text', cursive;
   color: #2B4573;
-
 }
 
 input {
@@ -222,7 +220,7 @@ a {
 }
 
 .text-homepage {
-  width: 500px;
+  width: 400px;
   font-size: 18px;
   color: whitesmoke;
 }
@@ -252,8 +250,6 @@ a {
     width: 100%;
     margin-top: 40px;
   }
-
-
 
   .homepage-bloc {
     flex-direction: column;
@@ -299,14 +295,11 @@ a {
     margin-bottom: 100px;
     margin-top: 20px;
   }
-
-
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1280px) {
   .text-homepage {
     font-size: 25px;
-
   }
 
   .mobile-content {

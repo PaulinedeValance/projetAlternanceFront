@@ -203,7 +203,6 @@ const handleSearch = (searchQuery: string) => {
 
   .game-cards-container {
     margin-left: 0;
-
   }
 
   .dashboard-avatar {

@@ -112,7 +112,6 @@ a {
   margin-right: 15px;
 }
 
-
 .flex-container {
   display: flex;
 }

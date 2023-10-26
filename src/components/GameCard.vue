@@ -291,7 +291,6 @@ hr:after {
     border-radius: 1em;
 }
 
-
 .title {
     font-size: 1.5em;
     font-weight: 900;

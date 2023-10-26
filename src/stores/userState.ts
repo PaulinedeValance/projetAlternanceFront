@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user', () => {
     return { id: id.value, email: email.value, username: username.value };
   }
 
-  // J'initialise l'ID utilisateur à partir du stockage local lors du chargement du store
+  // J'initialise l'ID du user à partir du localStorage lors du chargement du store
   const storedUserId = localStorage.getItem('userId');
   if (storedUserId) {
     id.value = storedUserId;
