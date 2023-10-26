@@ -88,21 +88,6 @@ a {
 
 }
 
-/* .sidebar {
-  background-color: #218e76ce;
-  width: 255px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  color: #fff;
-}
-
-.sidebar ul {
-  padding: 40px;
-} */
-
 .sidebar {
   background-color: #218e76ce;
   width: 255px;
@@ -132,13 +117,11 @@ a {
   display: flex;
 }
 
-/* Règle spécifique pour désactiver "display: flex" en mode mobile */
 @media screen and (max-width: 768px) {
   .flex-container {
     display: block;
   }
 }
-
 
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
@@ -229,7 +212,6 @@ a {
   }
 }
 
-/* Aligner le lien avec le burger menu en mode responsive */
 @media screen and (max-width: 768px) {
   .back-to-dashboard-link {
     display: block;

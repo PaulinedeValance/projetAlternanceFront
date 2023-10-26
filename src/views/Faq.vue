@@ -84,7 +84,6 @@ import NavBarOtherPages from "../components/NavBarOtherPages.vue"
         padding-right: 40px;
         text-align: justify;
     }
-
 }
 </style>
   

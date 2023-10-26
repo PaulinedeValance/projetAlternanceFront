@@ -109,7 +109,6 @@ const exportCollectionPDF = () => {
   font-size: 15px;
   padding: 12px 17px;
   margin: 0 auto;
-
 }
 
 .pdf-button:hover {

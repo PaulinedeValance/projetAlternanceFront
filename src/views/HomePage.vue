@@ -85,7 +85,6 @@ const login = async () => {
 
     <div class="modal-content">
       <button @click="closeModal" class="close-button-modale">X</button>
-      <!-- <Button :name="'X'" @click="closeModal" class="custom-button"></Button> -->
       <h2 class="connexion-title">Connexion</h2>
       <form @submit.prevent="login" class="login-form">
         <div class="form-group">
@@ -115,7 +114,6 @@ const login = async () => {
 
 }
 
-
 .homepage-container {
   position: relative;
   background-image: url('/images/blob-bg.svg');
@@ -143,13 +141,11 @@ const login = async () => {
   margin-left: 0;
 }
 
-
 .homepage-bloc {
   margin-left: 20px;
 }
 
 h1 {
-  /* color: #03224c; */
   color: whitesmoke;
 }
 

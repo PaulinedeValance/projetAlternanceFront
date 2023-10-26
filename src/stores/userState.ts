@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', () => {
       id.value = user.id;
       email.value = user.email;
       username.value = user.username;
-      // Je sauvegarder l'ID du user dans le localStorage
+      // Je sauvegarde l'ID du user dans le localStorage
       localStorage.setItem('userId', user.id);
       localStorage.setItem('userEmail', user.email);
       localStorage.setItem('userName', user.username);
@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user', () => {
     return { id: id.value, email: email.value, username: username.value };
   }
 
-  // Initialisez l'ID utilisateur à partir du stockage local lors du chargement du store
+  // J'initialise l'ID utilisateur à partir du stockage local lors du chargement du store
   const storedUserId = localStorage.getItem('userId');
   if (storedUserId) {
     id.value = storedUserId;

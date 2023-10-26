@@ -51,7 +51,6 @@ onMounted(async () => {
     gap: 20px;
     margin-right: 60px;
     text-align: justify;
-
 }
 
 
@@ -112,6 +111,5 @@ p {
         margin-left: 30px;
         margin-right: 30px;
     }
-
 }
 </style>

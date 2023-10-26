@@ -35,7 +35,6 @@ const slides = [
   justify-content: center;
 }
 
-
 .carousel__item {
   min-height: 200px;
   width: 100%;

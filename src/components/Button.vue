@@ -41,7 +41,6 @@ defineProps<{
   .custom-button {
     margin-left: 0;
   }
-
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1280px) {
@@ -50,7 +49,5 @@ defineProps<{
     margin-left: 0;
     padding: 15px 25px;
   }
-
-
 }
 </style>
